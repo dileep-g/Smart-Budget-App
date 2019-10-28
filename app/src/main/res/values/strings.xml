@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">SmartBudget</string>
+    <string name="title_expenses">Expenses</string>
+    <string name="title_budget">Budget</string>
+    <string name="title_transactions">Transactions</string>
+    <string name="title_alerts">Alerts</string>
+    <string name="title_profile">My Profile</string>
+</resources>

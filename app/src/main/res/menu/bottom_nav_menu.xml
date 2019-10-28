@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_expenses"
+        android:icon="@drawable/ic_attach_money_black_24dp"
+        android:title="@string/title_expenses" />
+
+    <item
+        android:id="@+id/navigation_budget"
+        android:icon="@drawable/ic_account_balance_wallet_black_24dp"
+        android:title="@string/title_budget" />
+
+    <item
+        android:id="@+id/navigation_transactions"
+        android:icon="@drawable/ic_format_align_justify_black_24dp"
+        android:title="@string/title_transactions" />
+
+    <item
+        android:id="@+id/navigation_alerts"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/title_alerts" />
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/ic_person_black_24dp"
+        android:title="@string/title_profile" />
+
+</menu>
