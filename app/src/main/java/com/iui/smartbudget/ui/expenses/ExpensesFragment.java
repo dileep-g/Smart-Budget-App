@@ -1,5 +1,6 @@
 package com.iui.smartbudget.ui.expenses;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,11 @@ public class ExpensesFragment extends Fragment {
     private ExpensesViewModel expensesViewModel;
     private PieChart pieChart;
     private BarChart barChart;
+    final int[] MY_COLORS = {Color.rgb(180,0,0), Color.rgb(20,60,200), Color.rgb(255,192,0),
+            Color.rgb(127,127,127), Color.rgb(146,208,80), Color.rgb(0,176,80), Color.rgb(79,129,189)};
+    ArrayList<Integer> colors = new ArrayList<Integer>();
+
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -64,7 +70,7 @@ public class ExpensesFragment extends Fragment {
         }
         PieDataSet dataSet=new PieDataSet(pieEntries, "Category Expenses");
         pieChart.setVisibility(View.VISIBLE);
-        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        dataSet.setColors(ColorTemplate.createColors(MY_COLORS));
         PieData pieData=new PieData(dataSet);
         pieChart.setData(pieData);
         Description desc=new Description();
