@@ -7,7 +7,7 @@ public class Record {
     private Date dateTime;
     private String vendor;
     private String category;
-    private double expense;
+    private float expense;
 
     public int getId() {
         return id;
@@ -41,11 +41,11 @@ public class Record {
         this.category = category;
     }
 
-    public double getExpense() {
+    public float getExpense() {
         return expense;
     }
 
-    public void setExpense(double expense) {
+    public void setExpense(float expense) {
         this.expense = expense;
     }
 
