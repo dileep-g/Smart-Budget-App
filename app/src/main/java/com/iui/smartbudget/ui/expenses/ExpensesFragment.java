@@ -16,14 +16,21 @@ import androidx.lifecycle.ViewModelProviders;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.iui.smartbudget.R;
 import com.iui.smartbudget.utilities.DataHolder;
 import com.iui.smartbudget.utilities.Record;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import  java.time.*;
 import java.util.*;
 
 
@@ -54,6 +61,7 @@ public class ExpensesFragment extends Fragment {
         pieChart=root.findViewById(R.id.pie_chart);
         barChart=root.findViewById(R.id.bar_chart);
         getExpensePieChart();
+        getMonthBarChart();
         return root;
     }
 
@@ -77,5 +85,31 @@ public class ExpensesFragment extends Fragment {
         desc.setText("Expenses in each Category");
         pieChart.setDescription(desc);
         pieChart.invalidate();
+    }
+
+    public void getMonthBarChart(){
+        List<BarEntry> barEntries=new ArrayList<>();
+        HashMap<Integer,HashMap<Month,Float>> monthToExpenseMap = new HashMap<>();
+        ArrayList<String> monthLabels=new ArrayList<>();
+        for(Record record : DataHolder.records){
+            Date date=record.getDateTime();
+            LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            if(!monthToExpenseMap.containsKey(localDate.getYear()))
+                monthToExpenseMap.put(localDate.getYear(), new HashMap<Month, Float>());
+            HashMap<Month, Float> currMap=monthToExpenseMap.get(localDate.getYear());
+            currMap.put(localDate.getMonth(), currMap.getOrDefault(localDate.getMonth(),0.0F)+record.getExpense());
+            if(!monthLabels.contains(localDate.getMonth().name().substring(0,3)))
+                monthLabels.add(localDate.getMonth().name().substring(0,3));
+        }
+        for(Month month : monthToExpenseMap.get(2019).keySet()){
+            barEntries.add(new BarEntry( month.getValue(), monthToExpenseMap.get(2019).get(month) ));
+        }
+        BarDataSet dataSet = new BarDataSet(barEntries, "Monthly Expenses");
+        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        barChart.setVisibility(View.VISIBLE);
+        BarData barData=new BarData(dataSet);
+        barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(monthLabels));
+        barChart.setData(barData);
+        barChart.invalidate();
     }
 }
