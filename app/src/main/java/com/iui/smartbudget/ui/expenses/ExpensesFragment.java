@@ -23,6 +23,7 @@ import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -142,6 +143,7 @@ public class ExpensesFragment extends Fragment implements AdapterView.OnItemSele
         Description desc=new Description();
         desc.setText("Monthly Expenses");
         barChart.setDescription(desc);
+        barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         barChart.getDescription().setTextSize(20f);
         barChart.getDescription().setPosition(250f, 40f);
         barChart.getDescription().setTextAlign(Paint.Align.CENTER);
