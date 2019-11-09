@@ -1,10 +1,14 @@
 package com.iui.smartbudget.ui.expenses;
 
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +20,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -24,6 +29,7 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.iui.smartbudget.MainActivity;
 import com.iui.smartbudget.R;
 import com.iui.smartbudget.utilities.DataHolder;
 import com.iui.smartbudget.utilities.Record;
@@ -39,9 +45,13 @@ public class ExpensesFragment extends Fragment {
     private ExpensesViewModel expensesViewModel;
     private PieChart pieChart;
     private BarChart barChart;
-    final int[] MY_COLORS = {Color.rgb(180,0,0), Color.rgb(20,60,200), Color.rgb(255,192,0),
-            Color.rgb(127,127,127), Color.rgb(146,208,80), Color.rgb(0,176,80), Color.rgb(79,129,189)};
+    final int[] MY_COLORS = {Color.rgb(75,136,235), Color.rgb(18,176,55), Color.rgb(214,66,43),
+            Color.rgb(232,187,23), Color.rgb(204,4,4), Color.rgb(176,16,204), Color.rgb(66,214,162)};
     ArrayList<Integer> colors = new ArrayList<Integer>();
+
+    // dropdown attributes
+    private Spinner spinner1;
+    private Button btnSubmit;
 
 
 
@@ -57,6 +67,13 @@ public class ExpensesFragment extends Fragment {
                 textView.setText(s);
             }
         });
+
+        Spinner spinner = (Spinner) root.findViewById(R.id.spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getContext(), R.array.years,
+                android.R.layout.simple_spinner_item) ;
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
 
         pieChart=root.findViewById(R.id.pie_chart);
         barChart=root.findViewById(R.id.bar_chart);
@@ -76,14 +93,20 @@ public class ExpensesFragment extends Fragment {
         for(String category : categories){
             pieEntries.add(new PieEntry(categoryMap.get(category),category));
         }
-        PieDataSet dataSet=new PieDataSet(pieEntries, "Category Expenses");
+        PieDataSet dataSet=new PieDataSet(pieEntries, "");
         pieChart.setVisibility(View.VISIBLE);
         dataSet.setColors(ColorTemplate.createColors(MY_COLORS));
         PieData pieData=new PieData(dataSet);
         pieChart.setData(pieData);
         Description desc=new Description();
-        desc.setText("Expenses in each Category");
+        desc.setText("Expense Categories");
         pieChart.setDescription(desc);
+        pieChart.getDescription().setTextSize(20f);
+        pieChart.getDescription().setTextAlign(Paint.Align.CENTER);
+        pieChart.getDescription().setPosition(250f, 40f);
+        Legend legend=pieChart.getLegend();
+        legend.setPosition(Legend.LegendPosition.PIECHART_CENTER);
+        pieData.setValueTextSize(15f);
         pieChart.invalidate();
     }
 
@@ -104,12 +127,22 @@ public class ExpensesFragment extends Fragment {
         for(Month month : monthToExpenseMap.get(2019).keySet()){
             barEntries.add(new BarEntry( month.getValue(), monthToExpenseMap.get(2019).get(month) ));
         }
-        BarDataSet dataSet = new BarDataSet(barEntries, "Monthly Expenses");
+        BarDataSet dataSet = new BarDataSet(barEntries, "");
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         barChart.setVisibility(View.VISIBLE);
         BarData barData=new BarData(dataSet);
         barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(monthLabels));
         barChart.setData(barData);
+        barChart.getXAxis().setLabelCount(12);
+        Description desc=new Description();
+        desc.setText("Monthly Expenses");
+        barChart.setDescription(desc);
+        barChart.getDescription().setTextSize(20f);
+        barChart.getDescription().setPosition(250f, 40f);
+        barChart.getDescription().setTextAlign(Paint.Align.CENTER);
+        barChart.getXAxis().setDrawGridLines(false);
+        barChart.getAxisLeft().setDrawGridLines(false);
+        barChart.getAxisRight().setDrawGridLines(false);
         barChart.invalidate();
     }
 }
