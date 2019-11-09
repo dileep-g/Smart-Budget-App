@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -40,7 +42,7 @@ import  java.time.*;
 import java.util.*;
 
 
-public class ExpensesFragment extends Fragment {
+public class ExpensesFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     private ExpensesViewModel expensesViewModel;
     private PieChart pieChart;
@@ -50,8 +52,8 @@ public class ExpensesFragment extends Fragment {
     ArrayList<Integer> colors = new ArrayList<Integer>();
 
     // dropdown attributes
-    private Spinner spinner1;
-    private Button btnSubmit;
+    private int selectedYear;
+
 
 
 
@@ -67,13 +69,13 @@ public class ExpensesFragment extends Fragment {
                 textView.setText(s);
             }
         });
-
+        selectedYear=2019;
         Spinner spinner = (Spinner) root.findViewById(R.id.spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getContext(), R.array.years,
                 android.R.layout.simple_spinner_item) ;
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-
+        spinner.setOnItemSelectedListener(this);
 
         pieChart=root.findViewById(R.id.pie_chart);
         barChart=root.findViewById(R.id.bar_chart);
@@ -87,6 +89,9 @@ public class ExpensesFragment extends Fragment {
         HashMap<String,Float>  categoryMap=new HashMap<>();
         HashSet<String> categories=new HashSet<>();
         for(Record record : DataHolder.records){
+            Date date=record.getDateTime();
+            LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            if(localDate.getYear()!=selectedYear) continue;
             categoryMap.put(record.getCategory(), categoryMap.getOrDefault(record.getCategory(),0.0f)+record.getExpense());
             categories.add(record.getCategory());
         }
@@ -124,8 +129,8 @@ public class ExpensesFragment extends Fragment {
             if(!monthLabels.contains(localDate.getMonth().name().substring(0,3)))
                 monthLabels.add(localDate.getMonth().name().substring(0,3));
         }
-        for(Month month : monthToExpenseMap.get(2019).keySet()){
-            barEntries.add(new BarEntry( month.getValue(), monthToExpenseMap.get(2019).get(month) ));
+        for(Month month : monthToExpenseMap.get(selectedYear).keySet()){
+            barEntries.add(new BarEntry( month.getValue(), monthToExpenseMap.get(selectedYear).get(month) ));
         }
         BarDataSet dataSet = new BarDataSet(barEntries, "");
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
@@ -144,5 +149,18 @@ public class ExpensesFragment extends Fragment {
         barChart.getAxisLeft().setDrawGridLines(false);
         barChart.getAxisRight().setDrawGridLines(false);
         barChart.invalidate();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String year=parent.getItemAtPosition(position).toString();
+        selectedYear = year.equals("Current Year") ? 2019 : 2018;
+        getExpensePieChart();
+        getMonthBarChart();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        selectedYear = 2019;
     }
 }
