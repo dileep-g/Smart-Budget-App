@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="5dip"
+    android:layout_marginRight="5dip"
+    android:foreground="?attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height= "match_parent"
+        android:orientation="horizontal"
+        android:padding="5dip"
+        android:weightSum="100">
+
+        <TextView
+            android:id="@+id/record_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="date"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:layout_weight="20"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="60" >
+
+            <TextView
+                android:id="@+id/record_vendor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="comment"
+                android:ellipsize="end"
+                android:textSize="20dp"/>
+
+            <TextView
+                android:id="@+id/record_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="category"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:textColor="@color/gray"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/record_expense"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="$ 0.0"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            android:layout_weight="20"/>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

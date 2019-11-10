@@ -12,7 +12,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import com.opencsv.CSVReader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
