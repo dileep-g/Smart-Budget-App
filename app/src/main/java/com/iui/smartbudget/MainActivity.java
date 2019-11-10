@@ -3,6 +3,15 @@ package com.iui.smartbudget;
 import android.os.Bundle;
 import android.util.Log;
 
+import android.graphics.Color;
+import android.os.Bundle;
+
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.iui.smartbudget.utilities.DataHolder;
 import com.iui.smartbudget.utilities.Record;
@@ -12,7 +21,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import com.opencsv.CSVReader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -75,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                     record.setDateTime(format.parse(nextLine[1]));
                     record.setVendor(nextLine[2]);
                     record.setCategory(nextLine[3]);
-                    record.setExpense(Double.valueOf(nextLine[4]));
+                    record.setExpense(Float.valueOf(nextLine[4]));
                     DataHolder.records.add(record);
                 }
             } catch (Exception e) {
