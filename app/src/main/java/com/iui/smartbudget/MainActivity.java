@@ -30,6 +30,8 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 public class MainActivity extends AppCompatActivity {
 
@@ -55,22 +57,8 @@ public class MainActivity extends AppCompatActivity {
 
         protected void readData(){
             try {
-//                String csvfileString = this.getApplicationInfo().dataDir + File.separatorChar + "data.csv";
-//                File csvfile = new File(csvfileString);
-//                CSVReader reader = new CSVReader(new FileReader(csvfile),',','\'',1);
-//                CSVReader reader = new CSVReader(new FileReader("data.csv"),',','\'',1);
-//                String[] nextLine;
-//                SimpleDateFormat format=new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
-//                while ((nextLine = reader.readNext()) != null) {
-//                    // nextLine[] is an array of values from the line
-//                    Record record=new Record();
-//                    record.setId(Integer.valueOf(nextLine[0]));
-//                    record.setDateTime(format.parse(nextLine[1]));
-//                    record.setVendor(nextLine[2]);
-//                    record.setCategory(nextLine[3]);
-//                    record.setExpense(Double.valueOf(nextLine[4]));
-//                    DataHolder.records.add(record);
-//                }
+                HashMap<String, Float> map = new HashMap<>();
+
                 InputStream is = getAssets().open("data.csv");
                 BufferedReader reader = new BufferedReader((new InputStreamReader(is)));
                 String csvLine;
@@ -85,7 +73,19 @@ public class MainActivity extends AppCompatActivity {
                     record.setCategory(nextLine[3]);
                     record.setExpense(Float.valueOf(nextLine[4]));
                     DataHolder.records.add(record);
+
+                    Date date=record.getDateTime();
+                    LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                    if(localDate.getYear()== 2019){
+                        map.put(record.getCategory(), map.getOrDefault(record.getCategory(), 0.0F) + record.getExpense());
+                    }
+
+
                 }
+                for(String category : map.keySet()){
+                    map.put(category, map.get(category)/12.0F);
+                }
+                DataHolder.categoryToAvgExpenseMap = map;
             } catch (Exception e) {
              Log.d(TAG,e.getLocalizedMessage(), e);
             }
