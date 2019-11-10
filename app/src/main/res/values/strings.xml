@@ -5,4 +5,9 @@
     <string name="title_transactions">Transactions</string>
     <string name="title_alerts">Alerts</string>
     <string name="title_profile">My Profile</string>
+	
+    <string-array name="years">
+        <item>Current Year</item>
+        <item>Last Year</item>
+    </string-array>
 </resources>
