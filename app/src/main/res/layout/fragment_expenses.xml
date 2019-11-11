@@ -27,17 +27,166 @@
 
             <Spinner
                 android:id="@+id/spinner"
-                android:layout_width="131dp"
+                android:layout_width="153dp"
                 android:layout_height="50dp"
                 android:entries="@array/years"
                 android:visibility="visible"
                 tools:visibility="visible" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="120"
+                >
+
+                <TextView
+                    android:id="@+id/tv_jan"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20"
+                    android:text="JAN"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_margin="4dp"
+                    android:background="@color/light_green" />
+
+                <TextView
+                    android:id="@+id/tv_feb"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20"
+                    android:text="FEB"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_margin="4dp"
+                    android:background="@color/light_green" />
+
+                <TextView
+                    android:id="@+id/tv_mar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20"
+                    android:text="MAR"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_margin="4dp"
+                    android:background="@color/light_green" />
+
+                <TextView
+                    android:id="@+id/tv_apr"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20"
+                    android:text="APR"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_margin="4dp"
+                    android:background="@color/light_green" />
+
+                <TextView
+                    android:id="@+id/tv_may"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20"
+                    android:text="MAY"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_margin="4dp"
+                    android:background="@color/light_green" />
+
+                <TextView
+                    android:id="@+id/tv_jun"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20"
+                    android:text="JUN"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_margin="4dp"
+                    android:background="@color/light_green" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="120"
+                >
+
+                <TextView
+                    android:id="@+id/tv_jul"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20"
+                    android:text="JUL"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_margin="4dp"
+                    android:background="@color/light_green" />
+
+                <TextView
+                    android:id="@+id/tv_aug"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20"
+                    android:text="AUG"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_margin="4dp"
+                    android:background="@color/light_green" />
+
+                <TextView
+                    android:id="@+id/tv_sep"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20"
+                    android:text="SEP"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_margin="4dp"
+                    android:background="@color/light_green" />
+
+                <TextView
+                    android:id="@+id/tv_oct"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20"
+                    android:text="OCT"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_margin="4dp"
+                    android:background="@color/light_green" />
+
+                <TextView
+                    android:id="@+id/tv_nov"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20"
+                    android:text="NOV"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_margin="4dp"
+                    android:background="@color/light_green" />
+
+                <TextView
+                    android:id="@+id/tv_dec"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20"
+                    android:text="DEC"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_margin="4dp"
+                    android:background="@color/light_green" />
+            </LinearLayout>
 
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/pie_chart"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
                 android:visibility="gone"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp">
 
             </com.github.mikephil.charting.charts.PieChart>
