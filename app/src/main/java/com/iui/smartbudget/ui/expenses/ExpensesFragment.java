@@ -32,11 +32,13 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import com.iui.smartbudget.MainActivity;
 import com.iui.smartbudget.R;
 import com.iui.smartbudget.utilities.DataHolder;
 import com.iui.smartbudget.utilities.Record;
 
+import org.w3c.dom.Text;
+
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import  java.time.*;
@@ -55,7 +57,20 @@ public class ExpensesFragment extends Fragment implements AdapterView.OnItemSele
     // dropdown attributes
     private int selectedYear;
 
-
+    // month selector
+    private TextView selectJan;
+    private TextView selectFeb;
+    private TextView selectMar;
+    private TextView selectApr;
+    private TextView selectMay;
+    private TextView selectJun;
+    private TextView selectJul;
+    private TextView selectAug;
+    private TextView selectSep;
+    private TextView selectOct;
+    private TextView selectNov;
+    private TextView selectDec;
+    private Set<String> selectedMonths = new HashSet<>();;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -82,19 +97,91 @@ public class ExpensesFragment extends Fragment implements AdapterView.OnItemSele
         barChart=root.findViewById(R.id.bar_chart);
         getExpensePieChart();
         getMonthBarChart();
+
+        // Month selector
+        selectJan = (TextView) root.findViewById(R.id.tv_jan);
+        setMonthSelector(selectJan);
+
+        selectFeb = (TextView) root.findViewById(R.id.tv_feb);
+        setMonthSelector(selectFeb);
+
+        selectMar = (TextView) root.findViewById(R.id.tv_mar);
+        setMonthSelector(selectMar);
+
+        selectApr = (TextView) root.findViewById(R.id.tv_apr);
+        setMonthSelector(selectApr);
+
+        selectMay = (TextView) root.findViewById(R.id.tv_may);
+        setMonthSelector(selectMay);
+
+        selectJun = (TextView) root.findViewById(R.id.tv_jun);
+        setMonthSelector(selectJun);
+
+        selectJul = (TextView) root.findViewById(R.id.tv_jul);
+        setMonthSelector(selectJul);
+
+        selectAug = (TextView) root.findViewById(R.id.tv_aug);
+        setMonthSelector(selectAug);
+
+        selectSep = (TextView) root.findViewById(R.id.tv_sep);
+        setMonthSelector(selectSep);
+
+        selectOct = (TextView) root.findViewById(R.id.tv_oct);
+        setMonthSelector(selectOct);
+
+        selectNov = (TextView) root.findViewById(R.id.tv_nov);
+        setMonthSelector(selectNov);
+
+        selectDec = (TextView) root.findViewById(R.id.tv_dec);
+        setMonthSelector(selectDec);
+
+
         return root;
+    }
+
+    private void setMonthSelector(TextView selectMonth) {
+        selectMonth.setOnClickListener(new TextView.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                TextView tv = (TextView) v;
+                if (tv.getCurrentTextColor() == getResources().getColor(R.color.white)) {
+                    tv.setTextColor(getResources().getColor(R.color.dark_gray));
+                    tv.setBackgroundColor(getResources().getColor(R.color.light_green));
+                    updatePieChart(tv.getText().toString(), false);
+                } else {
+                    tv.setTextColor(getResources().getColor(R.color.white));
+                    tv.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    updatePieChart(tv.getText().toString(), true);
+                }
+
+            }
+        });
+    }
+
+    private void updatePieChart(String month, boolean selected) {
+        if (selected) {
+            selectedMonths.add(month.toLowerCase());
+        } else {
+            selectedMonths.remove(month.toLowerCase());
+        }
+        getExpensePieChart();
     }
 
     public void getExpensePieChart(){
         List<PieEntry> pieEntries=new ArrayList<>();
-        HashMap<String,Float>  categoryMap=new HashMap<>();
+        HashMap<String,Float> categoryMap=new HashMap<>();
         HashSet<String> categories=new HashSet<>();
+        SimpleDateFormat dateformatter = new SimpleDateFormat("MMM");
         for(Record record : DataHolder.records){
             Date date=record.getDateTime();
             LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             if(localDate.getYear()!=selectedYear) continue;
-            categoryMap.put(record.getCategory(), categoryMap.getOrDefault(record.getCategory(),0.0f)+record.getExpense());
-            categories.add(record.getCategory());
+            if (selectedMonths.isEmpty() || selectedMonths.contains(dateformatter.format(record.getDateTime()).toLowerCase())) {
+                categoryMap.put(record.getCategory(), categoryMap.getOrDefault(record.getCategory(), 0.0f) + record.getExpense());
+                categories.add(record.getCategory());
+            }
         }
         for(String category : categories){
             pieEntries.add(new PieEntry(categoryMap.get(category),category));
