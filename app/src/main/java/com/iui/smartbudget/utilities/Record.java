@@ -2,7 +2,7 @@ package com.iui.smartbudget.utilities;
 
 
 import java.util.Date;
-public class Record {
+public class Record implements Comparable<Record> {
     private int id;
     private Date dateTime;
     private String vendor;
@@ -50,5 +50,8 @@ public class Record {
     }
 
 
-
+    @Override
+    public int compareTo(Record r) {
+        return r.dateTime.compareTo(this.dateTime);
+    }
 }

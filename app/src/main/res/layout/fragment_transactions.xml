@@ -2,18 +2,39 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/transactions_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/search_bar"
+    <LinearLayout
+        android:id="@+id/transaction_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:weightSum="100">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_bar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="80"/>
+
+        <ImageButton
+            android:id="@+id/add_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/search_bar"
+            android:layout_weight="20"
+            android:src="@drawable/ic_add_box_black_24dp"
+            android:scaleX="1.7"
+            android:scaleY="1.7"
+            android:background="@android:color/transparent"/>
+
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/recyclerView"
-        android:layout_below="@id/search_bar"
+        android:layout_below="@id/transaction_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
