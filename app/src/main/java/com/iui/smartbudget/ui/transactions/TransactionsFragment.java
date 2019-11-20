@@ -177,11 +177,8 @@ public class TransactionsFragment extends Fragment {
                 record.setDateTime(new Date());
                 record.setVendor(vendor);
                 record.setExpense((float)expense);
-                record.setCategory(category);
+                record.setCategory(category.toLowerCase());
                 mListadapter.addRecord(record);
-
-                // update central records DataHolder too!
-                DataHolder.getInstance().records.add(record);
 
                 mPopupWindow.dismiss();
             }
