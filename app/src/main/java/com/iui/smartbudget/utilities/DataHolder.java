@@ -8,12 +8,15 @@ import java.util.List;
 
 public class DataHolder {
     public static List<Record> records;
+    public static  List<Bucket> buckets;
     public static DataHolder dataHolder = new DataHolder();
     public static HashMap<String, Float> categoryToAvgExpenseMap;
 
     private DataHolder(){
             records=new ArrayList<>();
+            buckets=new ArrayList<>();
             categoryToAvgExpenseMap = new HashMap<>();
+
     }
 
     public static DataHolder getInstance(){
