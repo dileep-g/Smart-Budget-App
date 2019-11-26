@@ -10,4 +10,13 @@
         <item>Current Year</item>
         <item>Last Year</item>
     </string-array>
+
+    <string-array name="categories">
+        <item>Entertainment</item>
+        <item>Travel</item>
+        <item>Groceries</item>
+        <item>Dining</item>
+        <item>Personal</item>
+        <item>Shopping</item>
+    </string-array>
 </resources>

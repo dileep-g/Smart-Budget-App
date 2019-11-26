@@ -17,6 +17,7 @@ import com.iui.smartbudget.utilities.Record;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class TransactionsAdapter extends RecyclerView.Adapter <TransactionsAdapter.ViewHolder> implements Filterable
@@ -29,6 +30,7 @@ public class TransactionsAdapter extends RecyclerView.Adapter <TransactionsAdapt
 
     public TransactionsAdapter(List<Record> data, Context context)
     {
+        Collections.sort(data);
         this.dataList = data;
         this.context = context;
         this.dataListFiltered = data;
@@ -125,5 +127,11 @@ public class TransactionsAdapter extends RecyclerView.Adapter <TransactionsAdapt
                 notifyDataSetChanged();
             }
         };
+    }
+
+    public void addRecord(Record record) {
+        this.dataList.add(record);
+        Collections.sort(dataList);
+        notifyDataSetChanged();
     }
 }
