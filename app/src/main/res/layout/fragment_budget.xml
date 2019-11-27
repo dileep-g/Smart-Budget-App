@@ -9,19 +9,48 @@
         android:layout_height="match_parent"
         >
         <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Budget"
+            android:textSize="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
             android:id="@+id/entertainment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Entertainment"
-            android:textSize="15dp" />
+            android:textSize="15dp"
+            android:layout_below="@+id/title"/>
+
+        <TextView
+            android:id="@+id/entertainmentCurrent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100"
+            android:textSize="15dp"
+            android:layout_toLeftOf="@id/entertainmentSlash"
+            android:layout_below="@+id/title"/>
+
+        <TextView
+            android:id="@+id/entertainmentSlash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"
+            android:textSize="15dp"
+            android:layout_toLeftOf="@id/entertainmentTotal"
+            android:layout_below="@+id/title"/>
 
         <TextView
             android:id="@+id/entertainmentTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="100/150"
+            android:text="150"
             android:textSize="15dp"
-            android:layout_alignEnd="@id/entertainmentProgressBar"/>
+            android:layout_alignEnd="@id/entertainmentProgressBar"
+            android:layout_below="@+id/title"/>
 
         <ProgressBar
             android:id="@+id/entertainmentProgressBar"
@@ -46,10 +75,28 @@
         android:layout_below="@id/entertainmentProgressBar" />
 
         <TextView
+            android:id="@+id/diningCurrent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12"
+            android:textSize="15dp"
+            android:layout_toLeftOf="@id/diningSlash"
+            android:layout_below="@+id/entertainmentProgressBar"/>
+
+        <TextView
+            android:id="@+id/diningSlash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"
+            android:textSize="15dp"
+            android:layout_toLeftOf="@id/diningTotal"
+            android:layout_below="@+id/entertainmentProgressBar"/>
+
+        <TextView
             android:id="@+id/diningTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="12/150"
+            android:text="150"
             android:textSize="15dp"
             android:layout_below="@+id/entertainmentProgressBar"
             android:layout_alignEnd="@id/diningProgressBar"/>
@@ -77,10 +124,28 @@
             android:layout_below="@id/diningProgressBar" />
 
         <TextView
+            android:id="@+id/personalCurrent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="190"
+            android:textSize="15dp"
+            android:layout_toLeftOf="@id/personalSlash"
+            android:layout_below="@+id/diningProgressBar"/>
+
+        <TextView
+            android:id="@+id/personalSlash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"
+            android:textSize="15dp"
+            android:layout_toLeftOf="@id/personalTotal"
+            android:layout_below="@+id/diningProgressBar"/>
+
+        <TextView
             android:id="@+id/personalTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="190/150"
+            android:text="150"
             android:textSize="15dp"
             android:layout_below="@+id/diningProgressBar"
             android:layout_alignEnd="@id/personalProgressBar"/>
@@ -108,10 +173,28 @@
             android:layout_below="@id/personalProgressBar" />
 
         <TextView
+            android:id="@+id/travelCurrent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="25"
+            android:textSize="15dp"
+            android:layout_toLeftOf="@id/travelSlash"
+            android:layout_below="@+id/personalProgressBar"/>
+
+        <TextView
+            android:id="@+id/travelSlash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"
+            android:textSize="15dp"
+            android:layout_toLeftOf="@id/travelTotal"
+            android:layout_below="@+id/personalProgressBar"/>
+
+        <TextView
             android:id="@+id/travelTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="25/150"
+            android:text="150"
             android:textSize="15dp"
             android:layout_below="@+id/personalProgressBar"
             android:layout_alignEnd="@id/travelProgressBar"/>
@@ -139,10 +222,28 @@
             android:layout_below="@id/travelProgressBar" />
 
         <TextView
+            android:id="@+id/groceriesCurrent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="75"
+            android:textSize="15dp"
+            android:layout_toLeftOf="@id/groceriesSlash"
+            android:layout_below="@+id/travelProgressBar"/>
+
+        <TextView
+            android:id="@+id/groceriesSlash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"
+            android:textSize="15dp"
+            android:layout_toLeftOf="@id/groceriesTotal"
+            android:layout_below="@+id/travelProgressBar"/>
+
+        <TextView
             android:id="@+id/groceriesTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="75/150"
+            android:text="150"
             android:textSize="15dp"
             android:layout_below="@id/travelProgressBar"
             android:layout_alignEnd="@id/groceriesProgressBar"/>
@@ -170,10 +271,28 @@
             android:layout_below="@id/groceriesProgressBar" />
 
         <TextView
+            android:id="@+id/shoppingCurrent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="80"
+            android:textSize="15dp"
+            android:layout_toLeftOf="@id/shoppingSlash"
+            android:layout_below="@+id/groceriesProgressBar"/>
+
+        <TextView
+            android:id="@+id/shoppingSlash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"
+            android:textSize="15dp"
+            android:layout_toLeftOf="@id/shoppingTotal"
+            android:layout_below="@+id/groceriesProgressBar"/>
+
+        <TextView
             android:id="@+id/shoppingTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="80/150"
+            android:text="150"
             android:textSize="15dp"
             android:layout_below="@id/groceriesProgressBar"
             android:layout_alignEnd="@id/shoppingProgressBar"/>
