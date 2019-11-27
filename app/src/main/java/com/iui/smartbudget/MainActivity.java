@@ -31,6 +31,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.ZoneId;
 import java.util.*;
 public class MainActivity extends AppCompatActivity {
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         protected void readData(){
             try {
                 HashMap<String, Float> map = new HashMap<>();
-
+                HashMap<Month, HashMap<String, Float>> monthToCategoryMap = new HashMap<>();
                 InputStream is = getAssets().open("data.csv");
                 BufferedReader reader = new BufferedReader((new InputStreamReader(is)));
                 String csvLine;
@@ -78,6 +79,11 @@ public class MainActivity extends AppCompatActivity {
                     LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                     if(localDate.getYear()== 2019){
                         map.put(record.getCategory(), map.getOrDefault(record.getCategory(), 0.0F) + record.getExpense());
+                        if(!monthToCategoryMap.containsKey(localDate.getMonth()))
+                            monthToCategoryMap.put(localDate.getMonth(), new HashMap<String,Float>());
+                        HashMap<String,Float> temp = monthToCategoryMap.get(localDate.getMonth());
+                        temp.put(record.getCategory(), temp.getOrDefault(record.getCategory(),0.0F)+record.getExpense());
+
                     }
 
 
@@ -86,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
                     map.put(category, map.get(category)/12.0F);
                 }
                 DataHolder.categoryToAvgExpenseMap = map;
+                DataHolder.monthToCategoryMap = monthToCategoryMap;
             } catch (Exception e) {
              Log.d(TAG,e.getLocalizedMessage(), e);
             }
