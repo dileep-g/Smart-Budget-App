@@ -31,11 +31,19 @@ public class DataHolder {
     }
 
     public void checkAlerts() {
-        for(String bucket : Arrays.asList(new String[]{"Travel", "Shopping"})) {
+        // dummy buckets
+        Bucket dummy = new Bucket("Shopping", 300.0);
+        dummy.setCurrent(280);
+        buckets.add(dummy);
+        dummy = new Bucket("Entertainment", 300.0);
+        dummy.setCurrent(220);
+        buckets.add(dummy);
+
+        for(Bucket bucket : buckets) {
             // check how full the bucket is!
             // check over budget
             // dummy data
-            alerts.add(new Alert(bucket, new Date(), "Text goes here"));
+            alerts.add(new Alert(bucket.getName(), new Date(), "Text goes here"));
         }
     }
 
