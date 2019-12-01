@@ -24,7 +24,7 @@ public class Recommender {
         newBucket.setCurrent(30);
         buckets.add(newBucket);
         newBucket = new Bucket("Dining", 1.2f*DataHolder.categoryToAvgExpenseMap.get("dining"));
-        newBucket.setCurrent(280);
+        newBucket.setCurrent(300);
         buckets.add(newBucket);
         newBucket = new Bucket("Personal", 1.2f*DataHolder.categoryToAvgExpenseMap.get("personal"));
         newBucket.setCurrent(120);
@@ -33,7 +33,7 @@ public class Recommender {
         newBucket.setCurrent(100);
         buckets.add(newBucket);
         newBucket = new Bucket("Groceries", 1.2f*DataHolder.categoryToAvgExpenseMap.get("groceries"));
-        newBucket.setCurrent(130);
+        newBucket.setCurrent(180);
         buckets.add(newBucket);
 
         for(Bucket bucket : buckets){
@@ -60,6 +60,7 @@ public class Recommender {
     public  String generateRecommendation(Bucket bucket, float diff){
         StringBuilder recommendation=new StringBuilder();
         recommendation.append("You have exceeded your budget limit of $"+(Math.round(bucket.getCapacity()*10.0f)/10.0f) +" for "+bucket.getName()+"!");
+        recommendation.append("\n You can remove $");
         String category=bucket.getName();
         for(int i=DataHolder.categoriesPriorityList.size()-1;i>=0;i--){
             if(DataHolder.categoriesPriorityList.get(i).equals(category)) break;
@@ -69,10 +70,15 @@ public class Recommender {
             Bucket currBucket=categoryBucketMap.get(currCategory);
             if(currBucket.getCurrent()<=0.75f*currBucket.getCapacity()){
                 float offset=0.2f*currBucket.getCapacity();
-                recommendation.append("\n You can remove $"+(Math.round(offset*10.0f)/10.0f)+" from your "+currCategory+" budget to stay on track for the rest of the month");
+                float amount=Math.min(offset, diff);
+                //recommendation.append("\n You can remove $"+(Math.round(amount*10.0f)/10.0f)+" from your "+currCategory+" budget to stay on track for the rest of the month");
+                recommendation.append((Math.round(amount*10.0f)/10.0f)+" from your "+currCategory+" budget ");
                 if(offset>=diff) break;
+                recommendation.append("and $");
+                diff-=offset;
             }
         }
+        recommendation.append("to stay on track for the rest of the month.");
         return recommendation.toString();
     }
 }
