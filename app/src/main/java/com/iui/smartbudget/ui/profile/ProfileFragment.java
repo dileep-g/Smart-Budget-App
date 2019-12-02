@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.iui.smartbudget.R;
+import com.iui.smartbudget.utilities.DataHolder;
 
 import org.w3c.dom.Text;
 
@@ -29,10 +30,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+
 public class ProfileFragment extends Fragment {
 
     private ProfileViewModel profileViewModel;
-    final List<String> categories= Arrays.asList(new String[]{"Groceries", "Personal", "Travel", "Dining", "Shopping", "Entertainment"});
     RecyclerView recyclerView;
     ProfileAdapter adapter;
 
@@ -52,7 +53,7 @@ public class ProfileFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager. VERTICAL );
         recyclerView = (RecyclerView)root.findViewById(R.id.profileRecyclerView);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new ProfileAdapter(getContext(), categories);
+        adapter = new ProfileAdapter(getContext(), DataHolder.categoriesPriorityList);
         recyclerView.setAdapter(adapter);
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
@@ -64,7 +65,7 @@ public class ProfileFragment extends Fragment {
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder dragged, @NonNull RecyclerView.ViewHolder target) {
                 int position_dragged = dragged.getAdapterPosition();
                 int position_target = target.getAdapterPosition();
-                Collections.swap(categories, position_dragged, position_target);
+                Collections.swap(DataHolder.categoriesPriorityList, position_dragged, position_target);
                 adapter.notifyItemMoved(position_dragged, position_target);
                 return false;
             }
