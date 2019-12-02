@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.iui.smartbudget.R;
 import com.iui.smartbudget.utilities.Bucket;
+import com.iui.smartbudget.utilities.DataHolder;
 
 public class BudgetFragment extends Fragment {
 
@@ -102,10 +103,10 @@ public class BudgetFragment extends Fragment {
         shoppingCurrent = root.findViewById(R.id.shoppingCurrent);
         shoppingTotal = root.findViewById(R.id.shoppingTotal);
 
-        Bucket temp = new Bucket("Entertainment", 111);
+        Bucket temp = new Bucket("Entertainment", DataHolder.categoryToAvgExpenseMap.get("entertainment"));
         temp.setName("Entertainment Test");
-        temp.setCapacity(200);
-        temp.setCurrent(25);
+        temp.setCapacity(1.2 * DataHolder.categoryToAvgExpenseMap.get("entertainment"));
+        temp.setCurrent(100);
         entertainmentSetters(temp);
         //entertainmentPB.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#5CB85C")));
 
@@ -154,32 +155,47 @@ public class BudgetFragment extends Fragment {
         entertainmentPB.setProgress((int)b.getCurrent());
         if(b.getCurrent()/b.getCapacity() >= 0.75) { //red
             entertainmentPB.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#D9534F")));
-            //entertainmentPB.getIndeterminateDrawable().setColorFilter(Color.parseColor("#D9534F"), PorterDuff.Mode.SRC_IN);
-            //entertainmentPB.getProgressDrawable().setColorFilter(Color.parseColor("#D9534F"), PorterDuff.Mode.SRC_IN);
         }
         else if(b.getCurrent()/b.getCapacity() < 0.75 && b.getCurrent()/b.getCapacity() >= 0.50){ //yellow
             entertainmentPB.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#F0AD4E")));
-
-            //entertainmentPB.getIndeterminateDrawable().setColorFilter(Color.parseColor("#F0AD4E"), PorterDuff.Mode.SRC_IN);
-            //entertainmentPB.getProgressDrawable().setColorFilter(Color.parseColor("#F0AD4E"), PorterDuff.Mode.SRC_IN);
         }
         else{ //green
-            entertainmentPB.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#D9534F")));
-
-            //entertainmentPB.getIndeterminateDrawable().setColorFilter(Color.parseColor("#5CB85C"), PorterDuff.Mode.SRC_IN);
-            //entertainmentPB.getProgressDrawable().setColorFilter(Color.parseColor("#5CB85C"), PorterDuff.Mode.SRC_IN);
+            entertainmentPB.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#5CB85C")));
         }
-
-
     }
 
-    /*public void (){
-        progressBar.setSecondaryProgress(100);
-        progressBar.setProgress(10);
-        progressBar.setMax(100);
-    }*/
+    public void diningSetters(Bucket b){
+        diningName.setText((b.getName()));
+        diningCurrent.setText(String.valueOf((int)b.getCurrent()));
+        diningTotal.setText(String.valueOf((int)b.getCapacity()));
+        diningPB.setMax((int)b.getCapacity());
+        diningPB.setProgress((int)b.getCurrent());
+        if(b.getCurrent()/b.getCapacity() >= 0.75) { //red
+            diningPB.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#D9534F")));
+        }
+        else if(b.getCurrent()/b.getCapacity() < 0.75 && b.getCurrent()/b.getCapacity() >= 0.50){ //yellow
+            diningPB.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#F0AD4E")));
+        }
+        else { //green
+            diningPB.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#5CB85C")));
+        }
+    }
 
-    /*public void setEntertainmentProgressBar(ProgressBar p, int ){
-        p.
-    }*/
+    public void personalSetters(Bucket b){
+        personalName.setText(b.getName());
+        personalCurrent.setText(String.valueOf((int)b.getCurrent()));
+        personalTotal.setText(String.valueOf((int)b.getCapacity()));
+        personalPB.setMax((int)b.getCapacity());
+        personalPB.setProgress((int)b.getCurrent());
+        if(b.getCurrent()/b.getCapacity() >= 0.75) { //red
+            personalPB.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#D9534F")));
+        }
+        else if(b.getCurrent()/b.getCapacity() < 0.75 && b.getCurrent()/b.getCapacity() >= 0.50){ //yellow
+            personalPB.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#F0AD4E")));
+        }
+        else{ //green
+            personalPB.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#5CB85C")));
+        }
+    }
+
 }
