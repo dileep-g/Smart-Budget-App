@@ -107,7 +107,11 @@ public class BudgetFragment extends Fragment {
         temp.setName("Entertainment Test");
         temp.setCapacity(1.2 * DataHolder.categoryToAvgExpenseMap.get("entertainment"));
         temp.setCurrent(100);
-        entertainmentSetters(temp);
+
+        Bucket entertainmentBucket = new Bucket("Entertainment", DataHolder.categoryToAvgExpenseMap.get("entertainment"));
+        entertainmentBucket.setName("Entertainment");
+        entertainmentBucket.setCapacity(1.2 * DataHolder.categoryToAvgExpenseMap.get("entertainment"));
+        entertainmentBucket.setCurrent(100);
         //entertainmentPB.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#5CB85C")));
 
 
