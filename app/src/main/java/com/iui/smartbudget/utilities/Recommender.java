@@ -63,9 +63,10 @@ public class Recommender {
         recommendation.append("\n You can remove $");
         String category=bucket.getName();
         for(int i=DataHolder.categoriesPriorityList.size()-1;i>=0;i--){
-            if(DataHolder.categoriesPriorityList.get(i).equals(category)) break;
+            if(DataHolder.categoriesPriorityList.get(i).equals(category)) continue;
             // now check which categories to cut costs. If 20% of a category (within limit) can offset the diff ->
             // if current <= 0.75*capacity, take 20% from capacity
+            if(diff<0) break;
             String currCategory=DataHolder.categoriesPriorityList.get(i);
             Bucket currBucket=categoryBucketMap.get(currCategory);
             if(currBucket.getCurrent()<=0.75f*currBucket.getCapacity()){
