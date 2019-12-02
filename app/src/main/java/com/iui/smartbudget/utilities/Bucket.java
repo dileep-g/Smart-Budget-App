@@ -2,28 +2,28 @@ package com.iui.smartbudget.utilities;
 
 public class Bucket {
     private String name;
-    private double current;
-    private double capacity;
+    private float current;
+    private float capacity;
 
-    public Bucket(String name, double capacity) {
-        this.current = 0.0;
+    public Bucket(String name, float capacity) {
+        this.current = 0.0f;
         this.capacity = capacity;
         this.name = name;
     }
 
-    public double getCapacity() {
+    public float getCapacity() {
         return capacity;
     }
 
-    public void setCapacity(double capacity) {
+    public void setCapacity(float capacity) {
         this.capacity = capacity;
     }
 
-    public double getCurrent() {
+    public float getCurrent() {
         return current;
     }
 
-    public void setCurrent(double current) {
+    public void setCurrent(float current) {
         this.current = current;
     }
 

@@ -47,6 +47,7 @@ public class AlertsAdapter extends RecyclerView.Adapter <AlertsAdapter.ViewHolde
             this.textViewTitle = (TextView) itemView.findViewById(R.id.alert_title);
             this.textViewDate = (TextView) itemView.findViewById(R.id.alert_date );
             this.textViewText = (TextView) itemView.findViewById(R.id.alert_text );
+            //textViewText.setTextColor(Color.RED);
         }
     }
 

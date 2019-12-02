@@ -26,7 +26,6 @@ public class DataHolder {
             records=new ArrayList<>();
             buckets=new ArrayList<>();
             alerts=new ArrayList<>();
-            checkAlerts();
             categoriesPriorityList=Arrays.asList(new String[]{"Groceries", "Personal", "Travel", "Dining", "Shopping", "Entertainment"});
             categoryToAvgExpenseMap = new HashMap<>();
             monthToCategoryMap = new HashMap<>();
@@ -37,21 +36,5 @@ public class DataHolder {
         return dataHolder;
     }
 
-    public void checkAlerts() {
-        // dummy buckets
-        Bucket dummy = new Bucket("Shopping", 300.0);
-        dummy.setCurrent(280);
-        buckets.add(dummy);
-        dummy = new Bucket("Entertainment", 300.0);
-        dummy.setCurrent(220);
-        buckets.add(dummy);
-
-        for(Bucket bucket : buckets) {
-            // check how full the bucket is!
-            // check over budget
-            // dummy data
-            alerts.add(new Alert(bucket.getName(), new Date(), "Text goes here"));
-        }
-    }
 
 }
