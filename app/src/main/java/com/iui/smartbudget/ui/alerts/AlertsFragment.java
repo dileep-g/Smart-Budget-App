@@ -45,10 +45,7 @@ public class AlertsFragment extends Fragment {
 
         mRelativeLayout = (RelativeLayout) view.findViewById(R.id.alerts_home);
 
-        Recommender recommender=new Recommender();
-        if(recommender.alerts.size()>0) recommender.alerts.clear();
-        recommender.createBuckets(recommender.buckets);
-        mListadapter = new AlertsAdapter(recommender.alerts, getContext(), mRelativeLayout);
+        mListadapter = new AlertsAdapter(DataHolder.getInstance().alerts, getContext(), mRelativeLayout);
         mRecyclerView.setAdapter(mListadapter);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(), DividerItemDecoration.HORIZONTAL);
         dividerItemDecoration.setDrawable(getContext().getResources().getDrawable(R.drawable.sk_line_divider));

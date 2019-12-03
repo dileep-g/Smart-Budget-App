@@ -11,11 +11,11 @@ import java.util.List;
 
 
 public class DataHolder {
-    public List<Record> records;
-    public List<Bucket> buckets;
-    public List<Alert> alerts;
+    public static List<Record> records;
+    public static List<Bucket> buckets;
+    public static List<Alert> alerts;
     public static DataHolder dataHolder = new DataHolder();
-    public HashMap<String, Float> categoryToAvgExpenseMap;
+    public static HashMap<String, Float> categoryToAvgExpenseMap;
 
     public double bucketThreshold = 0.8;
 

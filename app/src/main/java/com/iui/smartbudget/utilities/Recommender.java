@@ -15,26 +15,26 @@ public class Recommender {
 
     }
 
-    public void createBuckets(List<Bucket> buckets){
+    public void createBuckets(){
 
-        Bucket newBucket = new Bucket("Shopping", 1.2f*DataHolder.getInstance().categoryToAvgExpenseMap.get("shopping"));
-        newBucket.setCurrent(20);
-        buckets.add(newBucket);
-        newBucket = new Bucket("Entertainment", 1.2f*DataHolder.getInstance().categoryToAvgExpenseMap.get("entertainment"));
-        newBucket.setCurrent(30);
-        buckets.add(newBucket);
-        newBucket = new Bucket("Dining", 1.2f*DataHolder.getInstance().categoryToAvgExpenseMap.get("dining"));
-        newBucket.setCurrent(300);
-        buckets.add(newBucket);
-        newBucket = new Bucket("Personal", 1.2f*DataHolder.getInstance().categoryToAvgExpenseMap.get("personal"));
-        newBucket.setCurrent(120);
-        buckets.add(newBucket);
-        newBucket = new Bucket("Travel", 1.2f*DataHolder.getInstance().categoryToAvgExpenseMap.get("travel"));
-        newBucket.setCurrent(100);
-        buckets.add(newBucket);
-        newBucket = new Bucket("Groceries", 1.2f*DataHolder.getInstance().categoryToAvgExpenseMap.get("groceries"));
-        newBucket.setCurrent(180);
-        buckets.add(newBucket);
+//        Bucket newBucket = new Bucket("Shopping", 1.2f*DataHolder.getInstance().categoryToAvgExpenseMap.get("shopping"));
+//        newBucket.setCurrent(20);
+//        buckets.add(newBucket);
+//        newBucket = new Bucket("Entertainment", 1.2f*DataHolder.getInstance().categoryToAvgExpenseMap.get("entertainment"));
+//        newBucket.setCurrent(30);
+//        buckets.add(newBucket);
+//        newBucket = new Bucket("Dining", 1.2f*DataHolder.getInstance().categoryToAvgExpenseMap.get("dining"));
+//        newBucket.setCurrent(300);
+//        buckets.add(newBucket);
+//        newBucket = new Bucket("Personal", 1.2f*DataHolder.getInstance().categoryToAvgExpenseMap.get("personal"));
+//        newBucket.setCurrent(120);
+//        buckets.add(newBucket);
+//        newBucket = new Bucket("Travel", 1.2f*DataHolder.getInstance().categoryToAvgExpenseMap.get("travel"));
+//        newBucket.setCurrent(100);
+//        buckets.add(newBucket);
+//        newBucket = new Bucket("Groceries", 1.2f*DataHolder.getInstance().categoryToAvgExpenseMap.get("groceries"));
+//        newBucket.setCurrent(180);
+//        buckets.add(newBucket);
 
         for(Bucket bucket : buckets){
             String category=bucket.getName();
