@@ -14,7 +14,7 @@ public class BudgetViewModel extends ViewModel {
 
     public BudgetViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue(String.valueOf(DataHolder.monthToCategoryMap.get(Month.JANUARY).get("travel")));
+        mText.setValue(String.valueOf(DataHolder.getInstance().categoryToAvgExpenseMap.get("shopping")));
     }
 
     public LiveData<String> getText() {

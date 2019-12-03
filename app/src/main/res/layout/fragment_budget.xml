@@ -1,19 +1,371 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+
+
+    <RelativeLayout
+        android:id="@+id/budget_home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="100"
+            tools:ignore="MissingConstraints">
+
+            <ImageButton
+                android:id="@+id/add_btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_weight="20"
+                android:src="@drawable/ic_edit_black_24dp"
+                android:scaleX="1.75"
+                android:scaleY="1.75"
+                android:background="@android:color/transparent"
+                android:layout_marginLeft="375dp"
+                android:layout_marginTop="5dp"
+                />
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="December"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            android:textSize="25dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="15dp"/>
+
+        <TextView
+            android:id="@+id/entertainment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Entertainment"
+            android:textSize="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_below="@+id/title"/>
+
+        <TextView
+            android:id="@+id/entertainmentCurrent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100"
+            android:textSize="20dp"
+            android:layout_toLeftOf="@id/entertainmentSlash"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/title"/>
+
+        <TextView
+            android:id="@+id/entertainmentSlash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"
+            android:textSize="20dp"
+            android:layout_toLeftOf="@id/entertainmentTotal"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/title"/>
+
+        <TextView
+            android:id="@+id/entertainmentTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="150"
+            android:textSize="20dp"
+            android:layout_alignEnd="@id/entertainmentProgressBar"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/title"/>
+
+        <ProgressBar
+            android:id="@+id/entertainmentProgressBar"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/entertainment"
+            android:progress="100"
+            android:max="150"
+            android:textAlignment="center"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:progressTint="#D9534F"
+            />
+
+        <TextView
+        android:id="@+id/dining"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dining"
+        android:textSize="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@id/entertainmentProgressBar" />
+
+        <TextView
+            android:id="@+id/diningCurrent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12"
+            android:textSize="20dp"
+            android:layout_toLeftOf="@id/diningSlash"
+            android:layout_below="@+id/entertainmentProgressBar"/>
+
+        <TextView
+            android:id="@+id/diningSlash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"
+            android:textSize="20dp"
+            android:layout_toLeftOf="@id/diningTotal"
+            android:layout_below="@+id/entertainmentProgressBar"/>
+
+        <TextView
+            android:id="@+id/diningTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="150"
+            android:textSize="20dp"
+            android:layout_below="@+id/entertainmentProgressBar"
+            android:layout_alignEnd="@id/diningProgressBar"/>
+
+        <ProgressBar
+            android:id="@+id/diningProgressBar"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:progress="12"
+            android:max="150"
+            android:textAlignment="center"
+            android:layout_below="@id/dining"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:progressTint="#5CB85C"
+            />
+
+        <TextView
+            android:id="@+id/personal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Personal"
+            android:textSize="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_below="@id/diningProgressBar" />
+
+        <TextView
+            android:id="@+id/personalCurrent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="190"
+            android:textSize="20dp"
+            android:layout_toLeftOf="@id/personalSlash"
+            android:layout_below="@+id/diningProgressBar"/>
+
+        <TextView
+            android:id="@+id/personalSlash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"
+            android:textSize="20dp"
+            android:layout_toLeftOf="@id/personalTotal"
+            android:layout_below="@+id/diningProgressBar"/>
+
+        <TextView
+            android:id="@+id/personalTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="150"
+            android:textSize="20dp"
+            android:layout_below="@+id/diningProgressBar"
+            android:layout_alignEnd="@id/personalProgressBar"/>
+
+        <ProgressBar
+            android:id="@+id/personalProgressBar"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:progress="190"
+            android:max="150"
+            android:textAlignment="center"
+            android:layout_below="@id/personal"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:progressTint="#D9534F"
+            />
+
+        <TextView
+            android:id="@+id/travel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Travel"
+            android:textSize="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_below="@id/personalProgressBar" />
+
+        <TextView
+            android:id="@+id/travelCurrent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="25"
+            android:textSize="20dp"
+            android:layout_toLeftOf="@id/travelSlash"
+            android:layout_below="@+id/personalProgressBar"/>
+
+        <TextView
+            android:id="@+id/travelSlash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"
+            android:textSize="20dp"
+            android:layout_toLeftOf="@id/travelTotal"
+            android:layout_below="@+id/personalProgressBar"/>
+
+        <TextView
+            android:id="@+id/travelTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="150"
+            android:textSize="20dp"
+            android:layout_below="@+id/personalProgressBar"
+            android:layout_alignEnd="@id/travelProgressBar"/>
+
+        <ProgressBar
+            android:id="@+id/travelProgressBar"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:progress="25"
+            android:max="150"
+            android:textAlignment="center"
+            android:layout_below="@id/travel"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:progressTint="#5CB85C"
+            />
+
+        <TextView
+            android:id="@+id/groceries"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Groceries"
+            android:textSize="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_below="@id/travelProgressBar" />
+
+        <TextView
+            android:id="@+id/groceriesCurrent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="75"
+            android:textSize="20dp"
+            android:layout_toLeftOf="@id/groceriesSlash"
+            android:layout_below="@+id/travelProgressBar"/>
+
+        <TextView
+            android:id="@+id/groceriesSlash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"
+            android:textSize="20dp"
+            android:layout_toLeftOf="@id/groceriesTotal"
+            android:layout_below="@+id/travelProgressBar"/>
+
+        <TextView
+            android:id="@+id/groceriesTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="150"
+            android:textSize="20dp"
+            android:layout_below="@id/travelProgressBar"
+            android:layout_alignEnd="@id/groceriesProgressBar"/>
+
+        <ProgressBar
+            android:id="@+id/groceriesProgressBar"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:progress="75"
+            android:max="150"
+            android:textAlignment="center"
+            android:layout_below="@id/groceries"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:progressTint="#F0AD4E"
+            />
+
+        <TextView
+            android:id="@+id/shopping"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shopping"
+            android:textSize="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_below="@id/groceriesProgressBar" />
+
+        <TextView
+            android:id="@+id/shoppingCurrent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="80"
+            android:textSize="20dp"
+            android:layout_toLeftOf="@id/shoppingSlash"
+            android:layout_below="@+id/groceriesProgressBar"/>
+
+        <TextView
+            android:id="@+id/shoppingSlash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"
+            android:textSize="20dp"
+            android:layout_toLeftOf="@id/shoppingTotal"
+            android:layout_below="@+id/groceriesProgressBar"/>
+
+        <TextView
+            android:id="@+id/shoppingTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="150"
+            android:textSize="20dp"
+            android:layout_below="@id/groceriesProgressBar"
+            android:layout_alignEnd="@id/shoppingProgressBar"/>
+
+        <ProgressBar
+            android:id="@+id/shoppingProgressBar"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:progress="80"
+            android:max="150"
+            android:textAlignment="center"
+            android:layout_below="@id/shopping"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:progressTint="#F0AD4E"
+            />
+    </RelativeLayout>
+
 
     <TextView
         android:id="@+id/text_budget"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

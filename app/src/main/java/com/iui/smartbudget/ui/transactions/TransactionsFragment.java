@@ -27,8 +27,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.iui.smartbudget.R;
+import com.iui.smartbudget.utilities.Bucket;
 import com.iui.smartbudget.utilities.Budget;
 import com.iui.smartbudget.utilities.DataHolder;
+import com.iui.smartbudget.utilities.Recommender;
 import com.iui.smartbudget.utilities.Record;
 
 import org.w3c.dom.Text;
@@ -181,6 +183,13 @@ public class TransactionsFragment extends Fragment {
                 record.setCategory(category.toLowerCase());
                 mListadapter.addRecord(record);
                 Budget.updateMonthExpenseMap();
+
+                // update bucket
+                for (Bucket bucket: DataHolder.buckets) {
+                    if (bucket.getName().toLowerCase().equals(category.toLowerCase())) {
+                        bucket.setCurrent(bucket.getCurrent()+(float)expense);
+                    }
+                }
 
                 mPopupWindow.dismiss();
             }

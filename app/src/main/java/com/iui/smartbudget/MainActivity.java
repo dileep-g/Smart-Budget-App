@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                     record.setVendor(nextLine[2]);
                     record.setCategory(nextLine[3]);
                     record.setExpense(Float.valueOf(nextLine[4]));
-                    DataHolder.records.add(record);
+                    DataHolder.getInstance().records.add(record);
 
                     Date date=record.getDateTime();
                     LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -91,13 +91,12 @@ public class MainActivity extends AppCompatActivity {
                 for(String category : map.keySet()){
                     map.put(category, map.get(category)/12.0F);
                 }
-                DataHolder.categoryToAvgExpenseMap = map;
+                DataHolder.getInstance().categoryToAvgExpenseMap = map;
                 DataHolder.monthToCategoryMap = monthToCategoryMap;
             } catch (Exception e) {
              Log.d(TAG,e.getLocalizedMessage(), e);
             }
 
         }
-
 
 }
