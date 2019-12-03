@@ -1,26 +1,47 @@
 package com.iui.smartbudget.ui.budget;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
+import java.util.*;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.iui.smartbudget.R;
+import com.iui.smartbudget.ui.transactions.TransactionsAdapter;
 import com.iui.smartbudget.utilities.Bucket;
 import com.iui.smartbudget.utilities.DataHolder;
+import com.iui.smartbudget.utilities.Record;
+
+import java.time.Month;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class BudgetFragment extends Fragment {
+    private static final String TAG="SB:BudgetFragment";
 
     private BudgetViewModel budgetViewModel;
     private TextView title;
@@ -55,15 +76,41 @@ public class BudgetFragment extends Fragment {
     private TextView shoppingName;
     private TextView shoppingCurrent;
     private TextView shoppingTotal;
-    private Bucket entertainment;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    private PopupWindow mPopupWindow;
+    private RelativeLayout mRelativeLayout;
+    private TransactionsAdapter mListadapter;
+    private String category = "";
+    private double capacity = 0.0;
+    private ImageButton addBtn;
+
+
+    private Bucket entertainmentBucket;
+    private Bucket diningBucket;
+    private Bucket personalBucket;
+    private Bucket travelBucket;
+    private Bucket groceriesBucket;
+    private Bucket shoppingBucket;
+
+    LayoutInflater inflater;
+    ViewGroup container;
+    Bundle savedInstanceState;
+    private FragmentManager fragmentManager;
+    private Fragment fragmentInstance;
+
+    public View onCreateView(final LayoutInflater inflater1,
+                             ViewGroup container1, Bundle savedInstanceState1) {
+        inflater = inflater1;
+        container = container1;
+        savedInstanceState = savedInstanceState1;
+        this.fragmentInstance = this;
+        this.fragmentManager = this.getFragmentManager();
         budgetViewModel =
                 ViewModelProviders.of(this).get(BudgetViewModel.class);
         View root = inflater.inflate(R.layout.fragment_budget, container, false);
         //final TextView textView = root.findViewById(R.id.text_budget);
         //TextView textView1 = root.findViewById(R.id.textViewProgressBar1);
+        mRelativeLayout = (RelativeLayout) root.findViewById(R.id.budget_home);
         title = root.findViewById(R.id.title);
         title.setText("The Budget For: " + "December");
 
@@ -103,52 +150,53 @@ public class BudgetFragment extends Fragment {
         shoppingCurrent = root.findViewById(R.id.shoppingCurrent);
         shoppingTotal = root.findViewById(R.id.shoppingTotal);
 
-        Bucket temp = new Bucket("Entertainment", DataHolder.categoryToAvgExpenseMap.get("entertainment"));
-        temp.setName("Entertainment Test");
-        temp.setCapacity(1.2 * DataHolder.categoryToAvgExpenseMap.get("entertainment"));
-        temp.setCurrent(100);
 
-        Bucket entertainmentBucket = new Bucket("Entertainment", DataHolder.categoryToAvgExpenseMap.get("entertainment"));
+        entertainmentBucket = new Bucket("Entertainment", DataHolder.categoryToAvgExpenseMap.get("entertainment"));
         entertainmentBucket.setName("Entertainment");
-        entertainmentBucket.setCapacity(1.2 * DataHolder.categoryToAvgExpenseMap.get("entertainment"));
-        entertainmentBucket.setCurrent(100);
-        //entertainmentPB.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#5CB85C")));
+        entertainmentBucket.setCapacity((float)2 * DataHolder.categoryToAvgExpenseMap.get("entertainment"));
+        entertainmentBucket.setCurrent(DataHolder.monthToCategoryMap.get(Month.DECEMBER).get("entertainment"));
+        entertainmentSetters(entertainmentBucket);
 
+        diningBucket = new Bucket("Dining", DataHolder.categoryToAvgExpenseMap.get("dining"));
+        diningBucket.setName("Dining");
+        diningBucket.setCapacity((float)2 * DataHolder.categoryToAvgExpenseMap.get("dining"));
+        diningBucket.setCurrent(DataHolder.monthToCategoryMap.get(Month.DECEMBER).get("dining"));
+        diningSetters(diningBucket);
 
+        personalBucket = new Bucket("Personal", DataHolder.categoryToAvgExpenseMap.get("personal"));
+        personalBucket.setName("Personal");
+        personalBucket.setCapacity((float)2 * DataHolder.categoryToAvgExpenseMap.get("personal"));
+        personalBucket.setCurrent(DataHolder.monthToCategoryMap.get(Month.DECEMBER).get("personal"));
+        personalSetters(personalBucket);
 
-//        Bucket entertainment = new Bucket("Entertainment", 100);
-//        entertainment.setCurrent();
-//        entertainment.setCapacity();
-        //entertainment.setName(String.valueOf(entertainmentName.getText()));
+        travelBucket = new Bucket("Travel", DataHolder.categoryToAvgExpenseMap.get("travel"));
+        travelBucket.setName("Travel");
+        travelBucket.setCapacity((float)2 * DataHolder.categoryToAvgExpenseMap.get("travel"));
+        travelBucket.setCurrent(DataHolder.monthToCategoryMap.get(Month.DECEMBER).get("travel"));
+        travelSetters(travelBucket);
 
-//        entertainmentName.setText(entertainment.getName());
-//        entertainmentCurrent.setText(String.valueOf(entertainment.getCurrent()));
-//        entertainmentTotal.setText(String.valueOf(entertainment.getCapacity()));
-        /*entertaintTV;
-        entertainPB;
-        entertainmentTotal;
-        Bucket entertain = new Bucket("Entertainment", 300);
-        entertain.setCurrent(angshul.give.me.value);
-        entertainmentTotal.setText(entertain.getCurrent() / entertain.getCapacity())
+        groceriesBucket = new Bucket("Groceries", DataHolder.categoryToAvgExpenseMap.get("groceries"));
+        groceriesBucket.setName("Groceries");
+        groceriesBucket.setCapacity((float)2 * DataHolder.categoryToAvgExpenseMap.get("groceries"));
+        groceriesBucket.setCurrent(DataHolder.monthToCategoryMap.get(Month.DECEMBER).get("groceries"));
+        groceriesSetters(groceriesBucket);
 
-*/
+        shoppingBucket = new Bucket("Shopping", DataHolder.categoryToAvgExpenseMap.get("shopping"));
+        shoppingBucket.setName("Shopping");
+        shoppingBucket.setCapacity((float)2 * DataHolder.categoryToAvgExpenseMap.get("shopping"));
+        shoppingBucket.setCurrent(DataHolder.monthToCategoryMap.get(Month.DECEMBER).get("shopping"));
+        shoppingSetters(shoppingBucket);
 
+        addBtn = (ImageButton) root.findViewById(R.id.add_btn);
+        addBtn.setOnClickListener(new View.OnClickListener() {
 
-//        entertainmentProgressBar = root.findViewById(R.id.entertainmentProgressBar);
-//        entertainmentProgressBar.setMax(150);
-//        entertainmentProgressBar.setProgress(100);
-//        budgetViewModel.getText().observe(this, new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
-
+            @Override
+            public void onClick(View v) {
+                setupPopup(inflater);
+            }
+        });
+        //entertainmentPB.setMax(1000);
         return root;
-    }
-
-    public void create(){
-
     }
 
     public void entertainmentSetters(Bucket b){
@@ -202,4 +250,185 @@ public class BudgetFragment extends Fragment {
         }
     }
 
+    public void travelSetters(Bucket b){
+        travelName.setText(b.getName());
+        travelCurrent.setText(String.valueOf((int)b.getCurrent()));
+        travelTotal.setText(String.valueOf((int)b.getCapacity()));
+        travelPB.setMax((int)b.getCapacity());
+        travelPB.setProgress((int)b.getCurrent());
+        if(b.getCurrent()/b.getCapacity() >= 0.75) { //red
+            travelPB.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#D9534F")));
+        }
+        else if(b.getCurrent()/b.getCapacity() < 0.75 && b.getCurrent()/b.getCapacity() >= 0.50){ //yellow
+            travelPB.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#F0AD4E")));
+        }
+        else{ //green
+            travelPB.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#5CB85C")));
+        }
+    }
+
+    public void groceriesSetters(Bucket b){
+        groceriesName.setText(b.getName());
+        groceriesCurrent.setText(String.valueOf((int)b.getCurrent()));
+        groceriesTotal.setText(String.valueOf((int)b.getCapacity()));
+        groceriesPB.setMax((int)b.getCapacity());
+        groceriesPB.setProgress((int)b.getCurrent());
+        if(b.getCurrent()/b.getCapacity() >= 0.75) { //red
+            groceriesPB.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#D9534F")));
+        }
+        else if(b.getCurrent()/b.getCapacity() < 0.75 && b.getCurrent()/b.getCapacity() >= 0.50){ //yellow
+            groceriesPB.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#F0AD4E")));
+        }
+        else{ //green
+            groceriesPB.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#5CB85C")));
+        }
+    }
+
+    public void shoppingSetters(Bucket b){
+        shoppingName.setText(b.getName());
+        shoppingCurrent.setText(String.valueOf((int)b.getCurrent()));
+        shoppingTotal.setText(String.valueOf((int)b.getCapacity()));
+        shoppingPB.setMax((int)b.getCapacity());
+        shoppingPB.setProgress((int)b.getCurrent());
+        if(b.getCurrent()/b.getCapacity() >= 0.75) { //red
+            shoppingPB.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#D9534F")));
+        }
+        else if(b.getCurrent()/b.getCapacity() < 0.75 && b.getCurrent()/b.getCapacity() >= 0.50){ //yellow
+            shoppingPB.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#F0AD4E")));
+        }
+        else{ //green
+            shoppingPB.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#5CB85C")));
+        }
+    }
+
+    private void setupPopup(LayoutInflater infalter) {
+        // Inflate the custom layout/view
+        View customView = infalter.inflate(R.layout.budget_add,null);
+          /*
+                    public PopupWindow (View contentView, int width, int height)
+                        Create a new non focusable popup window which can display the contentView.
+                        The dimension of the window must be passed to this constructor.
+
+                        The popup does not provide any background. This should be handled by
+                        the content view.
+
+                    Parameters
+                        contentView : the popup's content
+                        width : the popup's width
+                        height : the popup's height
+                */
+        // Initialize a new instance of popup window
+        mPopupWindow = new PopupWindow(
+                customView,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+        );
+
+        mPopupWindow.setFocusable(true);
+
+        // Set an elevation value for popup window
+        // Call requires API level 21
+        if(Build.VERSION.SDK_INT>=21){
+            mPopupWindow.setElevation(5.0f);
+        }
+
+        // Get a reference for the custom view close button
+        ImageButton closeButton = (ImageButton) customView.findViewById(R.id.budget_close);
+
+        // Set a click listener for the popup window close button
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Dismiss the popup window
+                mPopupWindow.dismiss();
+            }
+        });
+
+        //final TextInputEditText vendorInput = (TextInputEditText) customView.findViewById(R.id.vendor_input);
+        final TextInputEditText capacityInput = (TextInputEditText) customView.findViewById(R.id.capacity_input);
+
+        Spinner categorySpinner = (Spinner) customView.findViewById(R.id.add_budget_category);
+        categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                category = parent.getItemAtPosition(position).toString();
+                Log.d(TAG, "Category selected: " + parent.getItemAtPosition(position).toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        Button addButton = (Button) customView.findViewById(R.id.add_budget_btn);
+        addButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                capacity = Double.valueOf(capacityInput.getText().toString());
+//                List<Bucket> bucket = new ArrayList<Bucket>();
+//                bucket.add(entertainmentBucket);
+//                bucket.add(diningBucket);
+//                bucket.add(personalBucket);
+//                bucket.add(travelBucket);
+//                bucket.add(groceriesBucket);
+//                bucket.add(shoppingBucket);
+//
+//                for (Bucket temp : bucket) {
+//                    System.out.println("Temp : " + temp.getName().toLowerCase());
+//                    System.out.println("category: " + category.toLowerCase());
+//                    if (temp.getName().toString().toLowerCase().equals(category.toString().toLowerCase())) {
+//                        temp.setCapacity((float) capacity);
+//                        entertainmentSetters(temp);
+//                        //entertainmentPB.setMax(1000);
+//                        //Log.d("budget fragment", "INSIDE LOOP");
+//                    }
+//                }
+                if(category.toLowerCase().equals("entertainment")){
+                    entertainmentBucket.setCapacity((float)capacity);
+                    entertainmentSetters(entertainmentBucket);
+                }
+                else if(category.toLowerCase().equals("dining")){
+                    diningBucket.setCapacity((float)capacity);
+                    diningSetters(diningBucket);
+                }
+                else if(category.toLowerCase().equals("personal")){
+                    personalBucket.setCapacity((float)capacity);
+                    personalSetters(personalBucket);
+                }
+                else if(category.toLowerCase().equals("travel")){
+                    travelBucket.setCapacity((float)capacity);
+                    travelSetters(travelBucket);
+                }
+                else if(category.toLowerCase().equals("groceries")){
+                    groceriesBucket.setCapacity((float)capacity);
+                    groceriesSetters(groceriesBucket);
+                }
+                else if(category.toLowerCase().equals("shopping")){
+                    shoppingBucket.setCapacity((float)capacity);
+                    shoppingSetters(shoppingBucket);
+                }
+                mPopupWindow.dismiss();
+            }
+        });
+
+
+                /*
+                    public void showAtLocation (View parent, int gravity, int x, int y)
+                        Display the content view in a popup window at the specified location. If the
+                        popup window cannot fit on screen, it will be clipped.
+                        Learn WindowManager.LayoutParams for more information on how gravity and the x
+                        and y parameters are related. Specifying a gravity of NO_GRAVITY is similar
+                        to specifying Gravity.LEFT | Gravity.TOP.
+
+                    Parameters
+                        parent : a parent view to get the getWindowToken() token from
+                        gravity : the gravity which controls the placement of the popup window
+                        x : the popup's x location offset
+                        y : the popup's y location offset
+                */
+        // Finally, show the popup window at the center location of root relative layout
+        mPopupWindow.showAtLocation(mRelativeLayout, Gravity.CENTER,0,0);
+    }
 }
