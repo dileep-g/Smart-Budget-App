@@ -85,12 +85,15 @@ public class BudgetFragment extends Fragment {
     private ImageButton addBtn;
 
 
-    private Bucket entertainmentBucket;
-    private Bucket diningBucket;
-    private Bucket personalBucket;
-    private Bucket travelBucket;
-    private Bucket groceriesBucket;
-    private Bucket shoppingBucket;
+//    private Bucket entertainmentBucket;
+//    private Bucket diningBucket;
+//    private Bucket personalBucket;
+//    private Bucket travelBucket;
+//    private Bucket groceriesBucket;
+//    private Bucket shoppingBucket;
+
+    private Map<String, Bucket> bucketMapper = new HashMap<>();
+
 
     LayoutInflater inflater;
     ViewGroup container;
@@ -150,42 +153,67 @@ public class BudgetFragment extends Fragment {
         shoppingCurrent = root.findViewById(R.id.shoppingCurrent);
         shoppingTotal = root.findViewById(R.id.shoppingTotal);
 
+        if(DataHolder.buckets.size() == 0) {
+            Bucket entertainmentBucket = new Bucket("Entertainment", DataHolder.categoryToAvgExpenseMap.get("entertainment"));
+            entertainmentBucket.setName("Entertainment");
+            entertainmentBucket.setCapacity((float)2 * DataHolder.categoryToAvgExpenseMap.get("entertainment"));
+            entertainmentBucket.setCurrent(DataHolder.monthToCategoryMap.get(Month.DECEMBER).get("entertainment"));
 
-        entertainmentBucket = new Bucket("Entertainment", DataHolder.categoryToAvgExpenseMap.get("entertainment"));
-        entertainmentBucket.setName("Entertainment");
-        entertainmentBucket.setCapacity((float)2 * DataHolder.categoryToAvgExpenseMap.get("entertainment"));
-        entertainmentBucket.setCurrent(DataHolder.monthToCategoryMap.get(Month.DECEMBER).get("entertainment"));
-        entertainmentSetters(entertainmentBucket);
+            DataHolder.buckets.add(entertainmentBucket);
+            bucketMapper.put("entertainment", entertainmentBucket);
 
-        diningBucket = new Bucket("Dining", DataHolder.categoryToAvgExpenseMap.get("dining"));
-        diningBucket.setName("Dining");
-        diningBucket.setCapacity((float)2 * DataHolder.categoryToAvgExpenseMap.get("dining"));
-        diningBucket.setCurrent(DataHolder.monthToCategoryMap.get(Month.DECEMBER).get("dining"));
-        diningSetters(diningBucket);
+            Bucket diningBucket = new Bucket("Dining", DataHolder.categoryToAvgExpenseMap.get("dining"));
+            diningBucket.setName("Dining");
+            diningBucket.setCapacity((float)2 * DataHolder.categoryToAvgExpenseMap.get("dining"));
+            diningBucket.setCurrent(DataHolder.monthToCategoryMap.get(Month.DECEMBER).get("dining"));
 
-        personalBucket = new Bucket("Personal", DataHolder.categoryToAvgExpenseMap.get("personal"));
-        personalBucket.setName("Personal");
-        personalBucket.setCapacity((float)2 * DataHolder.categoryToAvgExpenseMap.get("personal"));
-        personalBucket.setCurrent(DataHolder.monthToCategoryMap.get(Month.DECEMBER).get("personal"));
-        personalSetters(personalBucket);
+            DataHolder.buckets.add(diningBucket);
+            bucketMapper.put("dining", diningBucket);
 
-        travelBucket = new Bucket("Travel", DataHolder.categoryToAvgExpenseMap.get("travel"));
-        travelBucket.setName("Travel");
-        travelBucket.setCapacity((float)2 * DataHolder.categoryToAvgExpenseMap.get("travel"));
-        travelBucket.setCurrent(DataHolder.monthToCategoryMap.get(Month.DECEMBER).get("travel"));
-        travelSetters(travelBucket);
+            Bucket personalBucket = new Bucket("Personal", DataHolder.categoryToAvgExpenseMap.get("personal"));
+            personalBucket.setName("Personal");
+            personalBucket.setCapacity((float)2 * DataHolder.categoryToAvgExpenseMap.get("personal"));
+            personalBucket.setCurrent(DataHolder.monthToCategoryMap.get(Month.DECEMBER).get("personal"));
 
-        groceriesBucket = new Bucket("Groceries", DataHolder.categoryToAvgExpenseMap.get("groceries"));
-        groceriesBucket.setName("Groceries");
-        groceriesBucket.setCapacity((float)2 * DataHolder.categoryToAvgExpenseMap.get("groceries"));
-        groceriesBucket.setCurrent(DataHolder.monthToCategoryMap.get(Month.DECEMBER).get("groceries"));
-        groceriesSetters(groceriesBucket);
+            DataHolder.buckets.add(personalBucket);
+            bucketMapper.put("personal", personalBucket);
 
-        shoppingBucket = new Bucket("Shopping", DataHolder.categoryToAvgExpenseMap.get("shopping"));
-        shoppingBucket.setName("Shopping");
-        shoppingBucket.setCapacity((float)2 * DataHolder.categoryToAvgExpenseMap.get("shopping"));
-        shoppingBucket.setCurrent(DataHolder.monthToCategoryMap.get(Month.DECEMBER).get("shopping"));
-        shoppingSetters(shoppingBucket);
+            Bucket travelBucket = new Bucket("Travel", DataHolder.categoryToAvgExpenseMap.get("travel"));
+            travelBucket.setName("Travel");
+            travelBucket.setCapacity((float)2 * DataHolder.categoryToAvgExpenseMap.get("travel"));
+            travelBucket.setCurrent(DataHolder.monthToCategoryMap.get(Month.DECEMBER).get("travel"));
+
+            DataHolder.buckets.add(travelBucket);
+            bucketMapper.put("travel", travelBucket);
+
+            Bucket groceriesBucket = new Bucket("Groceries", DataHolder.categoryToAvgExpenseMap.get("groceries"));
+            groceriesBucket.setName("Groceries");
+            groceriesBucket.setCapacity((float)2 * DataHolder.categoryToAvgExpenseMap.get("groceries"));
+            groceriesBucket.setCurrent(DataHolder.monthToCategoryMap.get(Month.DECEMBER).get("groceries"));
+
+            DataHolder.buckets.add(groceriesBucket);
+            bucketMapper.put("groceries", groceriesBucket);
+
+            Bucket shoppingBucket = new Bucket("Shopping", DataHolder.categoryToAvgExpenseMap.get("shopping"));
+            shoppingBucket.setName("Shopping");
+            shoppingBucket.setCapacity((float)2 * DataHolder.categoryToAvgExpenseMap.get("shopping"));
+            shoppingBucket.setCurrent(DataHolder.monthToCategoryMap.get(Month.DECEMBER).get("shopping"));
+
+            DataHolder.buckets.add(shoppingBucket);
+            bucketMapper.put("shopping", shoppingBucket);
+
+        } else {
+            for (Bucket bucket : DataHolder.buckets){
+                bucketMapper.put(bucket.getName().toLowerCase(), bucket);
+            }
+        }
+
+        entertainmentSetters(bucketMapper.get("entertainment"));
+        diningSetters(bucketMapper.get("dining"));
+        personalSetters(bucketMapper.get("personal"));
+        travelSetters(bucketMapper.get("travel"));
+        groceriesSetters(bucketMapper.get("groceries"));
+        shoppingSetters(bucketMapper.get("shopping"));
 
         addBtn = (ImageButton) root.findViewById(R.id.add_btn);
         addBtn.setOnClickListener(new View.OnClickListener() {
@@ -386,26 +414,32 @@ public class BudgetFragment extends Fragment {
 //                    }
 //                }
                 if(category.toLowerCase().equals("entertainment")){
+                    Bucket entertainmentBucket = bucketMapper.get("entertainment");
                     entertainmentBucket.setCapacity((float)capacity);
                     entertainmentSetters(entertainmentBucket);
                 }
                 else if(category.toLowerCase().equals("dining")){
+                    Bucket diningBucket = bucketMapper.get("dining");
                     diningBucket.setCapacity((float)capacity);
                     diningSetters(diningBucket);
                 }
                 else if(category.toLowerCase().equals("personal")){
+                    Bucket personalBucket = bucketMapper.get("personal");
                     personalBucket.setCapacity((float)capacity);
                     personalSetters(personalBucket);
                 }
                 else if(category.toLowerCase().equals("travel")){
+                    Bucket travelBucket = bucketMapper.get("travel");
                     travelBucket.setCapacity((float)capacity);
                     travelSetters(travelBucket);
                 }
                 else if(category.toLowerCase().equals("groceries")){
+                    Bucket groceriesBucket = bucketMapper.get("groceries");
                     groceriesBucket.setCapacity((float)capacity);
                     groceriesSetters(groceriesBucket);
                 }
                 else if(category.toLowerCase().equals("shopping")){
+                    Bucket shoppingBucket = bucketMapper.get("shopping");
                     shoppingBucket.setCapacity((float)capacity);
                     shoppingSetters(shoppingBucket);
                 }
