@@ -20,15 +20,15 @@
 
             <ImageButton
                 android:id="@+id/add_btn"
-                android:layout_width="20dp"
-                android:layout_height="match_parent"
-                android:layout_toRightOf="@id/search_bar"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_weight="20"
                 android:src="@drawable/ic_add_box_black_24dp"
-                android:scaleX="1.7"
-                android:scaleY="1.7"
+                android:scaleX="1.75"
+                android:scaleY="1.75"
                 android:background="@android:color/transparent"
-                android:layout_marginLeft="380dp"
+                android:layout_marginLeft="375dp"
+                android:layout_marginTop="5dp"
                 />
 
         </LinearLayout>
@@ -36,17 +36,22 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Budget"
-            android:textSize="30dp"
+            android:text="December"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            android:textSize="25dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="15dp"/>
 
         <TextView
             android:id="@+id/entertainment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Entertainment"
-            android:textSize="15dp"
+            android:textSize="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
             android:layout_below="@+id/title"/>
 
         <TextView
@@ -54,8 +59,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="100"
-            android:textSize="15dp"
+            android:textSize="20dp"
             android:layout_toLeftOf="@id/entertainmentSlash"
+            android:layout_marginTop="20dp"
             android:layout_below="@+id/title"/>
 
         <TextView
@@ -63,8 +69,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="/"
-            android:textSize="15dp"
+            android:textSize="20dp"
             android:layout_toLeftOf="@id/entertainmentTotal"
+            android:layout_marginTop="20dp"
             android:layout_below="@+id/title"/>
 
         <TextView
@@ -72,14 +79,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="150"
-            android:textSize="15dp"
+            android:textSize="20dp"
             android:layout_alignEnd="@id/entertainmentProgressBar"
+            android:layout_marginTop="20dp"
             android:layout_below="@+id/title"/>
 
         <ProgressBar
             android:id="@+id/entertainmentProgressBar"
             style="@android:style/Widget.ProgressBar.Horizontal"
-            android:layout_width="200dp"
+            android:layout_width="370dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_below="@id/entertainment"
@@ -87,6 +95,7 @@
             android:max="150"
             android:textAlignment="center"
             android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
             android:progressTint="#D9534F"
             />
 
@@ -95,7 +104,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Dining"
-        android:textSize="15dp"
+        android:textSize="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_below="@id/entertainmentProgressBar" />
 
         <TextView
@@ -103,7 +113,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="12"
-            android:textSize="15dp"
+            android:textSize="20dp"
             android:layout_toLeftOf="@id/diningSlash"
             android:layout_below="@+id/entertainmentProgressBar"/>
 
@@ -112,7 +122,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="/"
-            android:textSize="15dp"
+            android:textSize="20dp"
             android:layout_toLeftOf="@id/diningTotal"
             android:layout_below="@+id/entertainmentProgressBar"/>
 
@@ -121,14 +131,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="150"
-            android:textSize="15dp"
+            android:textSize="20dp"
             android:layout_below="@+id/entertainmentProgressBar"
             android:layout_alignEnd="@id/diningProgressBar"/>
 
         <ProgressBar
             android:id="@+id/diningProgressBar"
             style="@android:style/Widget.ProgressBar.Horizontal"
-            android:layout_width="200dp"
+            android:layout_width="370dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:progress="12"
@@ -136,6 +146,7 @@
             android:textAlignment="center"
             android:layout_below="@id/dining"
             android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
             android:progressTint="#5CB85C"
             />
 
@@ -144,7 +155,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Personal"
-            android:textSize="15dp"
+            android:textSize="20dp"
+            android:layout_marginLeft="20dp"
             android:layout_below="@id/diningProgressBar" />
 
         <TextView
@@ -152,7 +164,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="190"
-            android:textSize="15dp"
+            android:textSize="20dp"
             android:layout_toLeftOf="@id/personalSlash"
             android:layout_below="@+id/diningProgressBar"/>
 
@@ -161,7 +173,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="/"
-            android:textSize="15dp"
+            android:textSize="20dp"
             android:layout_toLeftOf="@id/personalTotal"
             android:layout_below="@+id/diningProgressBar"/>
 
@@ -170,14 +182,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="150"
-            android:textSize="15dp"
+            android:textSize="20dp"
             android:layout_below="@+id/diningProgressBar"
             android:layout_alignEnd="@id/personalProgressBar"/>
 
         <ProgressBar
             android:id="@+id/personalProgressBar"
             style="@android:style/Widget.ProgressBar.Horizontal"
-            android:layout_width="200dp"
+            android:layout_width="370dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:progress="190"
@@ -185,6 +197,7 @@
             android:textAlignment="center"
             android:layout_below="@id/personal"
             android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
             android:progressTint="#D9534F"
             />
 
@@ -193,7 +206,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Travel"
-            android:textSize="15dp"
+            android:textSize="20dp"
+            android:layout_marginLeft="20dp"
             android:layout_below="@id/personalProgressBar" />
 
         <TextView
@@ -201,7 +215,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="25"
-            android:textSize="15dp"
+            android:textSize="20dp"
             android:layout_toLeftOf="@id/travelSlash"
             android:layout_below="@+id/personalProgressBar"/>
 
@@ -210,7 +224,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="/"
-            android:textSize="15dp"
+            android:textSize="20dp"
             android:layout_toLeftOf="@id/travelTotal"
             android:layout_below="@+id/personalProgressBar"/>
 
@@ -219,14 +233,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="150"
-            android:textSize="15dp"
+            android:textSize="20dp"
             android:layout_below="@+id/personalProgressBar"
             android:layout_alignEnd="@id/travelProgressBar"/>
 
         <ProgressBar
             android:id="@+id/travelProgressBar"
             style="@android:style/Widget.ProgressBar.Horizontal"
-            android:layout_width="200dp"
+            android:layout_width="370dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:progress="25"
@@ -234,6 +248,7 @@
             android:textAlignment="center"
             android:layout_below="@id/travel"
             android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
             android:progressTint="#5CB85C"
             />
 
@@ -242,7 +257,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Groceries"
-            android:textSize="15dp"
+            android:textSize="20dp"
+            android:layout_marginLeft="20dp"
             android:layout_below="@id/travelProgressBar" />
 
         <TextView
@@ -250,7 +266,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="75"
-            android:textSize="15dp"
+            android:textSize="20dp"
             android:layout_toLeftOf="@id/groceriesSlash"
             android:layout_below="@+id/travelProgressBar"/>
 
@@ -259,7 +275,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="/"
-            android:textSize="15dp"
+            android:textSize="20dp"
             android:layout_toLeftOf="@id/groceriesTotal"
             android:layout_below="@+id/travelProgressBar"/>
 
@@ -268,14 +284,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="150"
-            android:textSize="15dp"
+            android:textSize="20dp"
             android:layout_below="@id/travelProgressBar"
             android:layout_alignEnd="@id/groceriesProgressBar"/>
 
         <ProgressBar
             android:id="@+id/groceriesProgressBar"
             style="@android:style/Widget.ProgressBar.Horizontal"
-            android:layout_width="200dp"
+            android:layout_width="370dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:progress="75"
@@ -283,6 +299,7 @@
             android:textAlignment="center"
             android:layout_below="@id/groceries"
             android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
             android:progressTint="#F0AD4E"
             />
 
@@ -291,7 +308,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Shopping"
-            android:textSize="15dp"
+            android:textSize="20dp"
+            android:layout_marginLeft="20dp"
             android:layout_below="@id/groceriesProgressBar" />
 
         <TextView
@@ -299,7 +317,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="80"
-            android:textSize="15dp"
+            android:textSize="20dp"
             android:layout_toLeftOf="@id/shoppingSlash"
             android:layout_below="@+id/groceriesProgressBar"/>
 
@@ -308,7 +326,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="/"
-            android:textSize="15dp"
+            android:textSize="20dp"
             android:layout_toLeftOf="@id/shoppingTotal"
             android:layout_below="@+id/groceriesProgressBar"/>
 
@@ -317,14 +335,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="150"
-            android:textSize="15dp"
+            android:textSize="20dp"
             android:layout_below="@id/groceriesProgressBar"
             android:layout_alignEnd="@id/shoppingProgressBar"/>
 
         <ProgressBar
             android:id="@+id/shoppingProgressBar"
             style="@android:style/Widget.ProgressBar.Horizontal"
-            android:layout_width="200dp"
+            android:layout_width="370dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:progress="80"
@@ -332,6 +350,7 @@
             android:textAlignment="center"
             android:layout_below="@id/shopping"
             android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
             android:progressTint="#F0AD4E"
             />
     </RelativeLayout>

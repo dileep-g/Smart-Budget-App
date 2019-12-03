@@ -115,7 +115,7 @@ public class BudgetFragment extends Fragment {
         //TextView textView1 = root.findViewById(R.id.textViewProgressBar1);
         mRelativeLayout = (RelativeLayout) root.findViewById(R.id.budget_home);
         title = root.findViewById(R.id.title);
-        title.setText("The Budget For: " + "December");
+        //title.setText("December");
 
         //Entertainment
         entertainmentPB = root.findViewById(R.id.entertainmentProgressBar);
