@@ -17,8 +17,6 @@ public class DataHolder {
     public static DataHolder dataHolder = new DataHolder();
     public static HashMap<String, Float> categoryToAvgExpenseMap;
 
-    public double bucketThreshold = 0.8;
-
     public static List<String> categoriesPriorityList;
     public static HashMap<Month, HashMap<String, Float>> monthToCategoryMap;
 
