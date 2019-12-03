@@ -1,9 +1,11 @@
 package com.iui.smartbudget.ui.alerts;
 
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -19,6 +21,7 @@ import com.iui.smartbudget.utilities.Bucket;
 import com.iui.smartbudget.utilities.DataHolder;
 import com.iui.smartbudget.utilities.Recommender;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +31,7 @@ public class AlertsFragment extends Fragment {
     private AlertsViewModel alertsViewModel;
     private RecyclerView mRecyclerView;
     private AlertsAdapter mListadapter;
+    private RelativeLayout mRelativeLayout;
     public HashMap<String,Bucket> categoryBucketMap;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -41,10 +45,13 @@ public class AlertsFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager. VERTICAL );
         mRecyclerView.setLayoutManager(layoutManager);
 
-        Recommender recommender=new Recommender();
-        if(recommender.alerts.size()>0) recommender.alerts.clear();
-        recommender.createBuckets(recommender.buckets);
-        mListadapter = new AlertsAdapter(recommender.alerts, getContext());
+        mRelativeLayout = (RelativeLayout) view.findViewById(R.id.alerts_home);
+
+        DataHolder.alerts = new ArrayList<>();
+        Recommender recommender = new Recommender();
+        recommender.createBuckets();
+
+        mListadapter = new AlertsAdapter(DataHolder.getInstance().alerts, getContext(), mRelativeLayout);
         mRecyclerView.setAdapter(mListadapter);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(), DividerItemDecoration.HORIZONTAL);
         dividerItemDecoration.setDrawable(getContext().getResources().getDrawable(R.drawable.sk_line_divider));

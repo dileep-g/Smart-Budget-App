@@ -17,7 +17,7 @@ public class ExpensesViewModel extends ViewModel {
         mText = new MutableLiveData<>();
         SimpleDateFormat format = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
         //mText.setValue(DataHolder.records.get(0).getVendor() + format.format(DataHolder.records.get(0).getDateTime()));
-        Date date=DataHolder.records.get(0).getDateTime();
+        Date date=DataHolder.getInstance().records.get(0).getDateTime();
         LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         //mText.setValue(localDate.getMonth().name());
     }

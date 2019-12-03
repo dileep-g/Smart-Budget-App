@@ -174,7 +174,7 @@ public class ExpensesFragment extends Fragment implements AdapterView.OnItemSele
         HashMap<String,Float> categoryMap=new HashMap<>();
         HashSet<String> categories=new HashSet<>();
         SimpleDateFormat dateformatter = new SimpleDateFormat("MMM");
-        for(Record record : DataHolder.records){
+        for(Record record : DataHolder.getInstance().records){
             Date date=record.getDateTime();
             LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             if(localDate.getYear()!=selectedYear) continue;
@@ -207,7 +207,7 @@ public class ExpensesFragment extends Fragment implements AdapterView.OnItemSele
         List<BarEntry> barEntries=new ArrayList<>();
         HashMap<Integer,HashMap<Month,Float>> monthToExpenseMap = new HashMap<>();
         ArrayList<String> monthLabels=new ArrayList<>();
-        for(Record record : DataHolder.records){
+        for(Record record : DataHolder.getInstance().records){
             Date date=record.getDateTime();
             LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             if(!monthToExpenseMap.containsKey(localDate.getYear()))

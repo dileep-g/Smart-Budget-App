@@ -5,10 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 public class Alert {
     private String title;
     private Date dateTime;
     private String text;
+
     private Bucket mainBucket;
     private Float mainValue;
     private Map<Bucket, Float> recoBuckets;

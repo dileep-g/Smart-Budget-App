@@ -34,6 +34,7 @@ import com.iui.smartbudget.R;
 import com.iui.smartbudget.ui.transactions.TransactionsAdapter;
 import com.iui.smartbudget.utilities.Bucket;
 import com.iui.smartbudget.utilities.DataHolder;
+import com.iui.smartbudget.utilities.Recommender;
 import com.iui.smartbudget.utilities.Record;
 
 import java.time.Month;
@@ -172,7 +173,7 @@ public class BudgetFragment extends Fragment {
 
             Bucket personalBucket = new Bucket("Personal", DataHolder.categoryToAvgExpenseMap.get("personal"));
             personalBucket.setName("Personal");
-            personalBucket.setCapacity((float)2 * DataHolder.categoryToAvgExpenseMap.get("personal"));
+            personalBucket.setCapacity((float)1.5 * DataHolder.categoryToAvgExpenseMap.get("personal"));
             personalBucket.setCurrent(DataHolder.monthToCategoryMap.get(Month.DECEMBER).get("personal"));
 
             DataHolder.buckets.add(personalBucket);
@@ -180,7 +181,7 @@ public class BudgetFragment extends Fragment {
 
             Bucket travelBucket = new Bucket("Travel", DataHolder.categoryToAvgExpenseMap.get("travel"));
             travelBucket.setName("Travel");
-            travelBucket.setCapacity((float)2 * DataHolder.categoryToAvgExpenseMap.get("travel"));
+            travelBucket.setCapacity((float)1.5 * DataHolder.categoryToAvgExpenseMap.get("travel"));
             travelBucket.setCurrent(DataHolder.monthToCategoryMap.get(Month.DECEMBER).get("travel"));
 
             DataHolder.buckets.add(travelBucket);
@@ -196,7 +197,7 @@ public class BudgetFragment extends Fragment {
 
             Bucket shoppingBucket = new Bucket("Shopping", DataHolder.categoryToAvgExpenseMap.get("shopping"));
             shoppingBucket.setName("Shopping");
-            shoppingBucket.setCapacity((float)2 * DataHolder.categoryToAvgExpenseMap.get("shopping"));
+            shoppingBucket.setCapacity((float)1.5 * DataHolder.categoryToAvgExpenseMap.get("shopping"));
             shoppingBucket.setCurrent(DataHolder.monthToCategoryMap.get(Month.DECEMBER).get("shopping"));
 
             DataHolder.buckets.add(shoppingBucket);

@@ -12,13 +12,13 @@ import java.util.List;
 
 public class DataHolder {
     public static List<Record> records;
-    public static  List<Bucket> buckets;
-    public static List<String> categoriesPriorityList;
+    public static List<Bucket> buckets;
+    public static List<Alert> alerts;
     public static DataHolder dataHolder = new DataHolder();
     public static HashMap<String, Float> categoryToAvgExpenseMap;
+
+    public static List<String> categoriesPriorityList;
     public static HashMap<Month, HashMap<String, Float>> monthToCategoryMap;
-    public static List<Alert> alerts;
-    public static double bucketThreshold = 0.8;
 
     private DataHolder(){
             records=new ArrayList<>();
