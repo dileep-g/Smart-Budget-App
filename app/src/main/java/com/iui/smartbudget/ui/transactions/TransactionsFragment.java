@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.iui.smartbudget.R;
+import com.iui.smartbudget.utilities.Budget;
 import com.iui.smartbudget.utilities.DataHolder;
 import com.iui.smartbudget.utilities.Record;
 
@@ -179,6 +180,7 @@ public class TransactionsFragment extends Fragment {
                 record.setExpense((float)expense);
                 record.setCategory(category.toLowerCase());
                 mListadapter.addRecord(record);
+                Budget.updateMonthExpenseMap();
 
                 mPopupWindow.dismiss();
             }
