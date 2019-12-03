@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -28,6 +29,7 @@ public class AlertsFragment extends Fragment {
     private AlertsViewModel alertsViewModel;
     private RecyclerView mRecyclerView;
     private AlertsAdapter mListadapter;
+    private RelativeLayout mRelativeLayout;
     public HashMap<String,Bucket> categoryBucketMap;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -41,10 +43,12 @@ public class AlertsFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager. VERTICAL );
         mRecyclerView.setLayoutManager(layoutManager);
 
+        mRelativeLayout = (RelativeLayout) view.findViewById(R.id.alerts_home);
+
         Recommender recommender=new Recommender();
         if(recommender.alerts.size()>0) recommender.alerts.clear();
         recommender.createBuckets(recommender.buckets);
-        mListadapter = new AlertsAdapter(recommender.alerts, getContext());
+        mListadapter = new AlertsAdapter(recommender.alerts, getContext(), mRelativeLayout);
         mRecyclerView.setAdapter(mListadapter);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(), DividerItemDecoration.HORIZONTAL);
         dividerItemDecoration.setDrawable(getContext().getResources().getDrawable(R.drawable.sk_line_divider));
