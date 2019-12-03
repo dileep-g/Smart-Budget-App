@@ -1,6 +1,7 @@
 package com.iui.smartbudget.ui.alerts;
 
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import com.iui.smartbudget.utilities.Bucket;
 import com.iui.smartbudget.utilities.DataHolder;
 import com.iui.smartbudget.utilities.Recommender;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -44,6 +46,10 @@ public class AlertsFragment extends Fragment {
         mRecyclerView.setLayoutManager(layoutManager);
 
         mRelativeLayout = (RelativeLayout) view.findViewById(R.id.alerts_home);
+
+        DataHolder.alerts = new ArrayList<>();
+        Recommender recommender = new Recommender();
+        recommender.createBuckets();
 
         mListadapter = new AlertsAdapter(DataHolder.getInstance().alerts, getContext(), mRelativeLayout);
         mRecyclerView.setAdapter(mListadapter);

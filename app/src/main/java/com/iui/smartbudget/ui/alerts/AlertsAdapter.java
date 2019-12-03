@@ -22,6 +22,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.iui.smartbudget.R;
 import com.iui.smartbudget.utilities.Alert;
 import com.iui.smartbudget.utilities.Bucket;
@@ -45,6 +46,7 @@ public class AlertsAdapter extends RecyclerView.Adapter <AlertsAdapter.ViewHolde
     private PopupWindow mPopupWindow;
     private ViewGroup parentLayout;
     private Map<String, TextInputEditText>  inputMapper;
+    private Map<String, TextInputLayout>  inputBoxMapper;
     private String[] bucketNames = {"entertainment", "travel", "groceries", "dining", "personal", "shopping"};
     private List<String> editBucketNames;
 
@@ -100,7 +102,11 @@ public class AlertsAdapter extends RecyclerView.Adapter <AlertsAdapter.ViewHolde
             {
 //                Toast.makeText (context, "Item " + position + " is clicked.", Toast. LENGTH_SHORT ).show( );
                 LayoutInflater inflater = LayoutInflater.from(context);
-                setupPopup(inflater, position);
+                if (DataHolder.alerts.get(position).getMainBucket() != null) {
+                    setupPopup(inflater, position);
+                } else {
+                    Toast.makeText (context, ":)", Toast. LENGTH_SHORT ).show( );
+                }
             }
         });
     }
@@ -160,29 +166,39 @@ public class AlertsAdapter extends RecyclerView.Adapter <AlertsAdapter.ViewHolde
         });
 
         inputMapper = new HashMap<>();
+        inputBoxMapper = new HashMap<>();
         final TextInputEditText entertainmentInput = (TextInputEditText) customView.findViewById(R.id.entertainment_input);
         inputMapper.put("entertainment", entertainmentInput);
+        inputBoxMapper.put("entertainment-box", (TextInputLayout) customView.findViewById(R.id.edit_entertainment_layout));
         final TextInputEditText travelInput = (TextInputEditText) customView.findViewById(R.id.travel_input);
         inputMapper.put("travel", travelInput);
+        inputBoxMapper.put("travel-box", (TextInputLayout) customView.findViewById(R.id.edit_travel_layout));
         final TextInputEditText groceriesInput = (TextInputEditText) customView.findViewById(R.id.groceries_input);
         inputMapper.put("groceries", groceriesInput);
+        inputBoxMapper.put("groceries-box", (TextInputLayout) customView.findViewById(R.id.edit_groceries_layout));
         final TextInputEditText diningInput = (TextInputEditText) customView.findViewById(R.id.dining_input);
         inputMapper.put("dining", diningInput);
+        inputBoxMapper.put("dining-box", (TextInputLayout) customView.findViewById(R.id.edit_dining_layout));
         final TextInputEditText personalInput = (TextInputEditText) customView.findViewById(R.id.personal_input);
         inputMapper.put("personal", personalInput);
+        inputBoxMapper.put("personal-box", (TextInputLayout) customView.findViewById(R.id.edit_personal_layout));
         final TextInputEditText shoppingInput = (TextInputEditText) customView.findViewById(R.id.shopping_input);
         inputMapper.put("shopping", shoppingInput);
+        inputBoxMapper.put("shopping-box", (TextInputLayout) customView.findViewById(R.id.edit_shopping_layout));
 
         Alert alert = DataHolder.getInstance().alerts.get(position);
         // Make edit boxes visible for alert specific buckets
-        TextInputEditText mainBucketInput = inputMapper.get(alert.getMainBucket().getName().toLowerCase());
-        mainBucketInput.setVisibility(View.VISIBLE);
         editBucketNames = new ArrayList<>();
-        editBucketNames.add(alert.getMainBucket().getName().toLowerCase());
-        for (Bucket bucket: alert.getRecoBuckets().keySet()) {
-            inputMapper.get(bucket.getName().toLowerCase()).setVisibility(View.VISIBLE);
-            inputMapper.get(bucket.getName().toLowerCase()).setText(Float.toString(alert.getRecoBuckets().get(bucket)));
-            editBucketNames.add(bucket.getName().toLowerCase());
+        if (alert.getMainBucket() != null) {
+            TextInputEditText mainBucketInput = inputMapper.get(alert.getMainBucket().getName().toLowerCase());
+            inputBoxMapper.get(alert.getMainBucket().getName().toLowerCase()+"-box").setVisibility(View.VISIBLE);
+            inputMapper.get(alert.getMainBucket().getName().toLowerCase()).setText(Float.toString(Math.round((alert.getMainBucket().getCapacity() + alert.getMainValue())*10.0f)/10.0f));
+            editBucketNames.add(alert.getMainBucket().getName().toLowerCase());
+            for (Bucket bucket: alert.getRecoBuckets().keySet()) {
+                inputBoxMapper.get(bucket.getName().toLowerCase() + "-box").setVisibility(View.VISIBLE);
+                inputMapper.get(bucket.getName().toLowerCase()).setText(Float.toString(Math.round((bucket.getCapacity() - alert.getRecoBuckets().get(bucket))*10.0f)/10.0f));
+                editBucketNames.add(bucket.getName().toLowerCase());
+            }
         }
 
         Button addButton = (Button) customView.findViewById(R.id.add_alerts_btn);

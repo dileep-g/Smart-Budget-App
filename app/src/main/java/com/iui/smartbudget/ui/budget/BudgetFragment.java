@@ -34,6 +34,7 @@ import com.iui.smartbudget.R;
 import com.iui.smartbudget.ui.transactions.TransactionsAdapter;
 import com.iui.smartbudget.utilities.Bucket;
 import com.iui.smartbudget.utilities.DataHolder;
+import com.iui.smartbudget.utilities.Recommender;
 import com.iui.smartbudget.utilities.Record;
 
 import java.time.Month;

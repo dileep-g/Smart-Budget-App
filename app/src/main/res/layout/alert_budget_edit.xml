@@ -21,13 +21,25 @@
         android:layout_margin="8dp"
         />
 
+    <TextView
+        android:id="@+id/tv_alert_budget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ib_alerts_close"
+        android:text="Recommended Budgets"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:layout_centerInParent="true"
+        />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/edit_entertainment_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/HintText"
         android:hint="Entertainment"
-        android:layout_below="@id/ib_alerts_close"
+        android:layout_below="@id/tv_alert_budget"
         android:visibility="gone"
         android:layout_margin="8dp">
 
@@ -134,7 +146,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/edit_shopping_layout"
-        android:text="ADD"
+        android:text="SAVE"
         android:textStyle="bold"
         android:textSize="18sp"
         android:textColor="@color/white"

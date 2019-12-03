@@ -23,7 +23,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_weight="20"
-                android:src="@drawable/ic_add_box_black_24dp"
+                android:src="@drawable/ic_edit_black_24dp"
                 android:scaleX="1.75"
                 android:scaleY="1.75"
                 android:background="@android:color/transparent"
