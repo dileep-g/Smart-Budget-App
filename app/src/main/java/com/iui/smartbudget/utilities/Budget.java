@@ -8,14 +8,19 @@ import java.util.HashMap;
 
 public class Budget {
 
-    private HashMap<String, Float> map = new HashMap<>();
-    private HashMap<Month, HashMap<String, Float>> monthToCategoryMap = new HashMap<>();
+    public static HashMap<String, Float> map = new HashMap<>();
+    public static HashMap<Month, HashMap<String, Float>> monthToCategoryMap = new HashMap<>();
+    public static Budget  budget=new Budget();
 
-    public Budget(){
+    private Budget(){
         monthToCategoryMap=new HashMap<>();
         }
 
-    public void updateMonthExpenseMap(){
+    public static Budget getInstance(){
+        return budget;
+    }
+
+    public static void updateMonthExpenseMap(){
         for(Record record : DataHolder.records){
             Date date=record.getDateTime();
             LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -27,7 +32,6 @@ public class Budget {
                 temp.put(record.getCategory(), temp.getOrDefault(record.getCategory(),0.0F)+record.getExpense());
 
             }
-
 
         }
        DataHolder.monthToCategoryMap=monthToCategoryMap;
